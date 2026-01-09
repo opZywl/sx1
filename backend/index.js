@@ -8,14 +8,17 @@ connectTOMongo();
 const app = express();
 const port = 5000;
 
+const corsOptions = {
+    origin: ["https://sx1-yzy.vercel.app", "https://sx1-yzy.onrender.com", "http://localhost:5173", "http://localhost:5174"],
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    optionsSuccessStatus: 204
+};
+
 app.use(express.json());
-app.use(cors(
-    {
-        origin: ["https://sx1-yzy.vercel.app", "https://sx1-yzy.onrender.com", "http://localhost:5173", "http://localhost:5174"],
-        methods: ["POST", "GET","PUT","DELETE"],
-        credentials: true
-    }
-));
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 
 
