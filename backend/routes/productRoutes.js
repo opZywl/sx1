@@ -56,17 +56,14 @@ router.post(
         imageUrl: req.body.imageUrl, // Store the image filename as imageUrl in the database
       };
 
-      if (!Array.isArray(req.body.variations) || req.body.variations.length === 0) {
-        return res.status(400).json({ error: "Select at least one variation." });
+      if (Array.isArray(req.body.variations) && req.body.variations.length > 0) {
+        const variations = await Variation.find({
+          type: { $in: req.body.variations },
+        });
+        body.variations = variations;
+      } else {
+        body.variations = [];
       }
-
-      const variations = await Variation.find({
-        type: { $in: req.body.variations },
-      });
-      if (variations.length <= 0) {
-        return res.status(400).json({ error: "No matching variations found." });
-      }
-      body.variations = variations;
 
       // Save the product with the image URL (filename stored in GridFS)
       product = await Product.create(body);

@@ -89,13 +89,6 @@ const AddProducts = () => {
       return;
     }
 
-    if (selectedOptions.length === 0) {
-      toast({
-        title: "Selecione pelo menos uma variação.",
-      });
-      return;
-    }
-
     // Construct the body for adding the product
     const body = {
       name: values.name,
