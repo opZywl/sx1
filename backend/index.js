@@ -10,11 +10,11 @@ const port = 5000;
 
 app.use(express.json());
 app.use(cors(
-  {
-    origin: ["https://zinstore.vercel.app"],
-    methods: ["POST", "GET","PUT","DELETE"],
-    credentials: true 
-  }
+    {
+        origin: ["https://sx1-yzy.vercel.app", "http://localhost:5173", "http://localhost:5174"],
+        methods: ["POST", "GET","PUT","DELETE"],
+        credentials: true
+    }
 ));
 
 
@@ -28,5 +28,5 @@ app.use("/cart", require("./routes/cartRoutes"));
 app.use("/variations", require("./routes/variationRoute"));
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
