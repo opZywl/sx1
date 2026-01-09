@@ -82,6 +82,20 @@ const AddProducts = () => {
   });
 
   const onSubmit = async (values) => {
+    if (!uploadedImageUrl) {
+      toast({
+        title: "Adicione uma imagem antes de salvar o produto.",
+      });
+      return;
+    }
+
+    if (selectedOptions.length === 0) {
+      toast({
+        title: "Selecione pelo menos uma variação.",
+      });
+      return;
+    }
+
     // Construct the body for adding the product
     const body = {
       name: values.name,
@@ -113,6 +127,9 @@ const AddProducts = () => {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
+    if (!file) {
+      return;
+    }
     setImagePreview(URL.createObjectURL(file)); // Set the image preview
 
     const formData = new FormData();
@@ -130,15 +147,21 @@ const AddProducts = () => {
       const data = await response.json();
       const imageUrl = `${import.meta.env.VITE_FRONTEND_HOST}/uploads/${data.filename}`; // Construct the image URL
       setUploadedImageUrl(imageUrl); // Store the uploaded image URL
+      form.setValue("imageUrl", imageUrl, { shouldValidate: true });
       // You can now use data.filename or whatever the server returns
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
+      toast({
+        title: "Não foi possível enviar a imagem.",
+      });
     }
-  }, []);
+  }, [form, toast]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: {
+      "image/*": [],
+    },
     maxFiles: 1,
   });
 

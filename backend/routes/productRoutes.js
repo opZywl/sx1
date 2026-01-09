@@ -56,11 +56,15 @@ router.post(
         imageUrl: req.body.imageUrl, // Store the image filename as imageUrl in the database
       };
 
+      if (!Array.isArray(req.body.variations) || req.body.variations.length === 0) {
+        return res.status(400).json({ error: "Select at least one variation." });
+      }
+
       const variations = await Variation.find({
         type: { $in: req.body.variations },
       });
       if (variations.length <= 0) {
-        return res.status(400).json({ error: errors.array() });
+        return res.status(400).json({ error: "No matching variations found." });
       }
       body.variations = variations;
 
