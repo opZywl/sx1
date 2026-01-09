@@ -19,9 +19,10 @@ router.post("/api/upload", (req, res) => {
       console.error("No file uploaded");
       return res.status(400).json({ error: "No file uploaded" });
     }
+    const backendHost = `${req.protocol}://${req.get("host")}`;
     res.json({
       filename: req.file.filename,
-      filepath: `${front_host}/uploads/${req.file.filename}`,
+      filepath: `${backendHost}/uploads/${req.file.filename}`,
     });
   });
 });
@@ -56,13 +57,14 @@ router.post(
         imageUrl: req.body.imageUrl, // Store the image filename as imageUrl in the database
       };
 
-      const variations = await Variation.find({
-        type: { $in: req.body.variations },
-      });
-      if (variations.length <= 0) {
-        return res.status(400).json({ error: errors.array() });
+      if (Array.isArray(req.body.variations) && req.body.variations.length > 0) {
+        const variations = await Variation.find({
+          type: { $in: req.body.variations },
+        });
+        body.variations = variations;
+      } else {
+        body.variations = [];
       }
-      body.variations = variations;
 
       // Save the product with the image URL (filename stored in GridFS)
       product = await Product.create(body);

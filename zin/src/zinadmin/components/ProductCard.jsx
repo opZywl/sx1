@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
-import { formatCurrencyBRL } from "@/lib/utils";
+import { formatCurrencyBRL, normalizeImageUrl } from "@/lib/utils";
 
 const ProductCard = ({ product }) => {
   return (
     <div className="relative bg-dark-2 border border-dark-4 rounded-md flex flex-col items-center text-justify justify-end px-7 py-4 w-full text-dark-5 max-sm:px-3 overflow-hidden max-h-[280px] transition ease-in-out ">
         {product.imageUrl ? (
           <div className="  flex items-center justify-center w-full mb-3 max-sm:hidden ">
-            <img src={product.imageUrl} alt={product.name} className="absolute inset-0 object-contain size-full" />
+            <img src={normalizeImageUrl(product.imageUrl)} alt={product.name} className="absolute inset-0 object-contain size-full" />
           </div>
         ) : (
           <div className="flex items-center justify-center w-full mb-3 max-sm:hidden ">

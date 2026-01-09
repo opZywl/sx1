@@ -2,6 +2,7 @@ const connectTOMongo = require("./db");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 connectTOMongo();
 
@@ -11,7 +12,7 @@ const port = 5000;
 const corsOptions = {
     origin: ["https://sx1-yzy.vercel.app", "https://sx1-yzy.onrender.com", "http://localhost:5173", "http://localhost:5174"],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "Token", "Page", "Filter", "Sort"],
     credentials: true,
     optionsSuccessStatus: 204
 };
@@ -19,6 +20,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
+app.use("/uploads", express.static(path.join(__dirname, "../zin/public/uploads")));
 
 
 
