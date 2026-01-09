@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="mb-4 md:mb-0">
             <Link to="/" className="flex items-center gap-2">
             <img src="/icons/navbar.svg" className="w-11" />
-              <span className="font-bold text-lg">ZIN STORE</span>
+              <span className="font-bold text-lg">sx1 Imports</span>
             </Link>
           </div>
           <nav className="flex flex-col space-y-2 text-zinc-400 text-sm">
@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>
-            © 2023-2024 ZIN STORE, Inc. All rights reserved.
+            © 2023-2024 sx1 Imports, Inc. All rights reserved.
           </p>
         </div>
       </div>

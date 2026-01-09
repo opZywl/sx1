@@ -3,11 +3,11 @@ export default function About() {
     <div className="min-h-screen bg-dark-6 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">
-          About ZIN Store
+          About sx1 Imports
         </h1>
         <div className="space-y-3 text-gray-300">
           <p>
-            ZIN Store is a cutting-edge e-commerce platform dedicated to
+            sx1 Imports is a cutting-edge e-commerce platform dedicated to
             bringing you the latest in technology and innovation. Founded in
             2023, we've quickly become a go-to destination for tech enthusiasts
             and early adopters.
@@ -44,10 +44,10 @@ export default function About() {
           <p>
             We're always here to help. If you have any questions, concerns, or
             just want to chat about the latest tech, don't hesitate to reach out
-            to us at support@ZINstore.com or call us at 1-800-ZIN-TECH.
+            to us at support@sx1imports.com or call us at 1-800-SX1-TECH.
           </p>
           <p className="mt-8 text-sm text-gray-400">
-            ZIN Store - Bringing the Future to Your Doorstep
+            sx1 Imports - Bringing the Future to Your Doorstep
           </p>
         </div>
       </div>
