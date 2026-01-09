@@ -147,11 +147,15 @@ const AddProducts = () => {
       const data = await response.json();
       const imageUrl = `${import.meta.env.VITE_FRONTEND_HOST}/uploads/${data.filename}`; // Construct the image URL
       setUploadedImageUrl(imageUrl); // Store the uploaded image URL
+      form.setValue("imageUrl", imageUrl, { shouldValidate: true });
       // You can now use data.filename or whatever the server returns
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
+      toast({
+        title: "Não foi possível enviar a imagem.",
+      });
     }
-  }, []);
+  }, [form, toast]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
