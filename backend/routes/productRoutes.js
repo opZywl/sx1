@@ -134,13 +134,15 @@ router.put(
         imageUrl,
       };
 
-      const updatedVariations = await Variation.find({
-        type: { $in: variations },
-      });
-      if (updatedVariations.length <= 0) {
-        return res.status(400).json({ error: errors.array() });
+      if (Array.isArray(variations) && variations.length > 0) {
+        const updatedVariations = await Variation.find({
+          type: { $in: variations },
+        });
+        if (updatedVariations.length <= 0) {
+          return res.status(400).json({ error: "No matching variations found." });
+        }
+        body.variations = updatedVariations;
       }
-      body.variations = updatedVariations;
 
       product = await Product.findByIdAndUpdate(id, body, { new: true });
 
