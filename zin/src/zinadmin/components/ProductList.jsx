@@ -1,5 +1,6 @@
 // components/ProductList.jsx
 import { deleteProduct, getProducts } from "@/lib/api/api";
+import { normalizeImageUrl } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import {
   Pagination,
@@ -76,7 +77,7 @@ const ProductList = () => {
               {product.imageUrl ? (
                 <div className="flex items-center justify-center w-1/3 mb-3 h-full max-sm:hidden ">
                   <img
-                    src={product.imageUrl}
+                    src={normalizeImageUrl(product.imageUrl)}
                     alt={product.name}
                     className="w-[200px] h-[90px] rounded-md"
                   />

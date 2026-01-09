@@ -2,6 +2,7 @@ const connectTOMongo = require("./db");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 connectTOMongo();
 
@@ -19,6 +20,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
+app.use("/uploads", express.static(path.join(__dirname, "../zin/public/uploads")));
 
 
 

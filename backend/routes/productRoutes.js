@@ -19,9 +19,10 @@ router.post("/api/upload", (req, res) => {
       console.error("No file uploaded");
       return res.status(400).json({ error: "No file uploaded" });
     }
+    const backendHost = `${req.protocol}://${req.get("host")}`;
     res.json({
       filename: req.file.filename,
-      filepath: `${front_host}/uploads/${req.file.filename}`,
+      filepath: `${backendHost}/uploads/${req.file.filename}`,
     });
   });
 });

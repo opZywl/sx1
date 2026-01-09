@@ -125,6 +125,9 @@ const UpdateModal = ({ product, refreshProducts }) => {
   // Handle file drop and upload image
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
+    if (!file) {
+      return;
+    }
     setImagePreview(URL.createObjectURL(file)); // Show image preview
 
     const formData = new FormData();
@@ -140,16 +143,22 @@ const UpdateModal = ({ product, refreshProducts }) => {
       }
 
       const data = await response.json();
-      const imageUrl = `${import.meta.env.VITE_FRONTEND_HOST}/uploads/${data.filename}`;
+      const imageUrl = `${import.meta.env.VITE_BACKEND_HOST}/uploads/${data.filename}`;
       setUploadedImageUrl(imageUrl); // Set uploaded image URL
+      form.setValue("imageUrl", imageUrl, { shouldValidate: true });
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
+      toast({
+        title: "Não foi possível enviar a imagem.",
+      });
     }
-  }, []);
+  }, [form, toast]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: {
+      "image/*": [],
+    },
     maxFiles: 1,
   });
 

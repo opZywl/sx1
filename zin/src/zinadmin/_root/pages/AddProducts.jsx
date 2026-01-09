@@ -138,7 +138,7 @@ const AddProducts = () => {
       }
 
       const data = await response.json();
-      const imageUrl = `${import.meta.env.VITE_FRONTEND_HOST}/uploads/${data.filename}`; // Construct the image URL
+      const imageUrl = `${import.meta.env.VITE_BACKEND_HOST}/uploads/${data.filename}`; // Construct the image URL
       setUploadedImageUrl(imageUrl); // Store the uploaded image URL
       form.setValue("imageUrl", imageUrl, { shouldValidate: true });
       // You can now use data.filename or whatever the server returns
