@@ -11,7 +11,7 @@ const port = 5000;
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://sx1-yzy.vercel.app", "http://localhost:5173", "http://localhost:5174"],
+        origin: ["https://sx1-yzy.vercel.app", "https://sx1-yzy.onrender.com", "http://localhost:5173", "http://localhost:5174"],
         methods: ["POST", "GET","PUT","DELETE"],
         credentials: true
     }
