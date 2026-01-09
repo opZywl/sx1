@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { addItemToCart, getProductById } from "@/lib/api/api";
-import { formUrlQuery } from "@/lib/utils";
+import { formUrlQuery, formatCurrencyBRL } from "@/lib/utils";
 import { Loader, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -63,12 +63,12 @@ const ProductDetails = () => {
     fetchCart();
     if (item.success) {
       toast({
-        title: 'Item added.'
+        title: "Item adicionado.",
       })
     }else if(!token){
-      toast({title: 'Login to add to cart'})
+      toast({ title: "Faça login para adicionar ao carrinho" })
     } else{
-      toast({title: 'Error'})
+      toast({ title: "Erro" })
     }
   };
 
@@ -119,7 +119,7 @@ const ProductDetails = () => {
               {product.name}
             </h1>
             <span className="bg-blue-700 w-max font-semibold p-2 px-3  rounded-full text-base max-sm:text-xs flex font-mono items-center justify-center h-max">
-              ₹{product.price}
+              {formatCurrencyBRL(product.price)}
             </span>
           </div>
 
@@ -162,7 +162,7 @@ const ProductDetails = () => {
             disabled={isAddToCartDisabled} // Disable button if not all variants are selected
           >
             <Plus className="w-4 absolute left-5 group-hover:rotate-45 transition-all"/>
-            Add to Cart
+            Adicionar ao carrinho
           </Button>
         </div>
       </div>

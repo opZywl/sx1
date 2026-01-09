@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import CartItemCard from "./CartItemCard.jsx";
 import { useCart } from "../context/CartContext.jsx";
 import { Button } from "@/components/ui/button";
+import { formatCurrencyBRL } from "@/lib/utils";
 
 const Cart = () => {
   const { cartItems, fetchCart, cartTotal } = useCart();
@@ -13,7 +14,7 @@ const Cart = () => {
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="">
-        <h4 className="font-bold text-xl">My Cart</h4>
+        <h4 className="font-bold text-xl">Meu carrinho</h4>
         <div className="h-full mt-5 flex flex-col">
           {cartItems.length > 0 ? (
             cartItems.map((product) => (
@@ -25,22 +26,26 @@ const Cart = () => {
               />
             ))
           ) : (
-            <>No items</>
+            <>Nenhum item</>
           )}
         </div>
       </div>
       {cartItems.length > 0 && (
         <div className="flex flex-col gap-4">
           <div className="flex justify-between border-b border-zinc-700 py-1 font-mono items-end text-base text-zinc-400">
-            <p>Taxes</p>
-            <p className="text-base font-mono text-white">₹0.00</p>
+            <p>Impostos</p>
+            <p className="text-base font-mono text-white">
+              {formatCurrencyBRL(0)}
+            </p>
           </div>
           <div className="flex justify-between border-b border-zinc-700 py-1 font-mono items-end text-base text-zinc-400">
             <p>Total</p>
-            <p className="text-base font-mono text-white">₹{cartTotal}</p>
+            <p className="text-base font-mono text-white">
+              {formatCurrencyBRL(cartTotal)}
+            </p>
           </div>
           <Button className="py-2 rounded-full px-3 bg-blue-700">
-            CheckOut
+            Finalizar compra
           </Button>
         </div>
       )}

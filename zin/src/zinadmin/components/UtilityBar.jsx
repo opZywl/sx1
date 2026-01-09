@@ -28,7 +28,7 @@ const UtilityBar = () => {
           }`}
         >
           <img src="/icons/home.svg" className="w-5 group-hover:fill-current " />
-          <span className="max-sm:hidden ">Home</span>
+          <span className="max-sm:hidden ">Início</span>
         </div>
       </Link>
       <Link to="/admin/users">
@@ -38,7 +38,7 @@ const UtilityBar = () => {
           }`}
         >
           <img src="/icons/people.svg" className="w-5 group-hover:fill-black " />
-          <span className="max-sm:hidden ">Users</span>
+          <span className="max-sm:hidden ">Usuários</span>
         </div>
       </Link>
       <Link to="/admin/products">
@@ -48,7 +48,7 @@ const UtilityBar = () => {
           }`}
         >
           <img src="/icons/manage.svg" className="w-5 group-hover:fill-current " />
-          <span className="max-sm:hidden ">Products</span>
+          <span className="max-sm:hidden ">Produtos</span>
         </div>
       </Link>
       <Link to="/admin/configs">
@@ -58,7 +58,7 @@ const UtilityBar = () => {
           }`}
         >
           <img src="/icons/webConfig.svg" className="w-5 group-hover:fill-current " />
-          <span className="max-sm:hidden ">Website config</span>
+          <span className="max-sm:hidden ">Config. do site</span>
         </div>
       </Link>
     </div>

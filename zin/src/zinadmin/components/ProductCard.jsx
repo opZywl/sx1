@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { formatCurrencyBRL } from "@/lib/utils";
 
 const ProductCard = ({ product }) => {
   return (
@@ -20,10 +21,11 @@ const ProductCard = ({ product }) => {
         </h2>
         <div className=" z-10 flex gap-5 mt-5 max-sm:mt-2 justify-center items-center bg-dark-3 p-2 rounded-xl border w-max px-3 border-dark-4">
           <p className="text-lg max-sm:text-sm">
-            <span className="font-semibold">Price:</span> {product.price}
+            <span className="font-semibold">Preço:</span>{" "}
+            {formatCurrencyBRL(product.price)}
           </p>
           <p className="text-lg max-sm:text-sm">
-            <span className="font-semibold">Stock:</span> {product.stock}
+            <span className="font-semibold">Estoque:</span> {product.stock}
           </p>
         </div>
     </div>

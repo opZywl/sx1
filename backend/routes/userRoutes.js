@@ -108,8 +108,8 @@ router.post(
       const mailOptions = {
         from: '"sx1 Imports" zzzzlynx@gmail.com',
         to: req.body.email,
-        subject: "OTP Verification",
-        text: `Your OTP code is: ${otp}. It expires in 10 minutes.`,
+        subject: "Verificação de OTP",
+        text: `Seu código OTP é: ${otp}. Ele expira em 10 minutos.`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {

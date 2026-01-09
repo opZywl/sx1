@@ -3,51 +3,53 @@ export default function About() {
     <div className="min-h-screen bg-dark-6 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">
-          About sx1 Imports
+          Sobre a sx1 Imports
         </h1>
         <div className="space-y-3 text-gray-300">
           <p>
-            sx1 Imports is a cutting-edge e-commerce platform dedicated to
-            bringing you the latest in technology and innovation. Founded in
-            2023, we've quickly become a go-to destination for tech enthusiasts
-            and early adopters.
-          </p>
-          <h2 className="text-xl font-semibold text-white mt-6">Our Mission</h2>
-          <p>
-            Our mission is to make the latest technology accessible to everyone.
-            We believe that innovation should be within reach, and we strive to
-            offer a curated selection of high-quality products at competitive
-            prices.
+            A sx1 Imports é uma plataforma de e-commerce de ponta dedicada a
+            trazer o que há de mais recente em tecnologia e inovação. Fundada em
+            2023, rapidamente nos tornamos um destino de referência para
+            entusiastas de tecnologia e early adopters.
           </p>
           <h2 className="text-xl font-semibold text-white mt-6">
-            What Sets Us Apart
+            Nossa missão
+          </h2>
+          <p>
+            Nossa missão é tornar a tecnologia mais recente acessível a todos.
+            Acreditamos que a inovação deve estar ao alcance de todos e buscamos
+            oferecer uma seleção curada de produtos de alta qualidade com preços
+            competitivos.
+          </p>
+          <h2 className="text-xl font-semibold text-white mt-6">
+            O que nos diferencia
           </h2>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              Curated Selection: We handpick every product in our store,
-              ensuring only the best makes it to you.
+              Seleção curada: escolhemos cada produto da nossa loja para garantir
+              que apenas o melhor chegue até você.
             </li>
             <li>
-              Expert Support: Our team of tech experts is always ready to assist
-              you with any questions or concerns.
+              Suporte especializado: nossa equipe de especialistas está sempre
+              pronta para ajudar com dúvidas ou necessidades.
             </li>
             <li>
-              Fast Shipping: We partner with top logistics providers to get your
-              orders to you as quickly as possible.
+              Envio rápido: trabalhamos com as melhores transportadoras para
+              entregar seus pedidos o mais rápido possível.
             </li>
             <li>
-              Secure Shopping: Your security is our priority. We use
-              state-of-the-art encryption to protect your data.
+              Compra segura: sua segurança é nossa prioridade. Usamos
+              criptografia de ponta para proteger seus dados.
             </li>
           </ul>
-          <h2 className="text-xl font-semibold text-white mt-6">Contact Us</h2>
+          <h2 className="text-xl font-semibold text-white mt-6">Fale conosco</h2>
           <p>
-            We're always here to help. If you have any questions, concerns, or
-            just want to chat about the latest tech, don't hesitate to reach out
-            to us at support@sx1imports.com or call us at 1-800-SX1-TECH.
+            Estamos sempre prontos para ajudar. Se você tiver dúvidas, sugestões
+            ou quiser conversar sobre as últimas novidades, fale conosco em
+            support@sx1imports.com ou ligue para 0800-SX1-TECH.
           </p>
           <p className="mt-8 text-sm text-gray-400">
-            sx1 Imports - Bringing the Future to Your Doorstep
+            sx1 Imports - Levando o futuro até a sua porta
           </p>
         </div>
       </div>

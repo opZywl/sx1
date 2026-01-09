@@ -3,50 +3,49 @@ export default function TermsConditions() {
     <div className="min-h-screen bg-dark-6 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">
-          Terms and Conditions
+          Termos e Condições
         </h1>
         <div className="space-y-3 text-gray-300">
           <p>
-            Welcome to ACME Store. By accessing our website and making a
-            purchase, you agree to these Terms and Conditions.
+            Bem-vindo(a) à sx1 Imports. Ao acessar nosso site e realizar uma
+            compra, você concorda com estes Termos e Condições.
           </p>
           <h2 className="text-xl font-semibold text-white mt-6">
-            Use of the Website
+            Uso do site
           </h2>
           <p>
-            You may use our website for lawful purposes only. You must not use
-            our website in any way that causes, or may cause, damage to the
-            website or impairment of the availability or accessibility of the
-            website.
+            Você pode usar nosso site apenas para fins legais. Não é permitido
+            utilizar o site de forma que cause, ou possa causar, danos ou
+            comprometa a disponibilidade e acessibilidade do site.
           </p>
           <h2 className="text-xl font-semibold text-white mt-6">
-            Product Information
+            Informações de produtos
           </h2>
           <p>
-            We strive to provide accurate product information, but we do not
-            warrant that product descriptions or other content is accurate,
-            complete, reliable, current, or error-free.
+            Buscamos fornecer informações precisas, mas não garantimos que as
+            descrições dos produtos ou outros conteúdos sejam exatos, completos,
+            confiáveis, atuais ou livres de erros.
           </p>
           <h2 className="text-xl font-semibold text-white mt-6">
-            Pricing and Availability
+            Preços e disponibilidade
           </h2>
           <p>
-            All prices are subject to change without notice. We reserve the
-            right to modify or discontinue any product without notice. We shall
-            not be liable to you or any third party for any modification, price
-            change, or discontinuance of any product.
+            Todos os preços estão sujeitos a alteração sem aviso prévio.
+            Reservamo-nos o direito de modificar ou descontinuar qualquer
+            produto sem aviso. Não nos responsabilizamos por qualquer alteração
+            de preço, modificação ou descontinuação.
           </p>
           <h2 className="text-xl font-semibold text-white mt-6">
-            User Accounts
+            Contas de usuário
           </h2>
           <p>
-            You are responsible for maintaining the confidentiality of your
-            account and password and for restricting access to your computer.
-            You agree to accept responsibility for all activities that occur
-            under your account or password.
+            Você é responsável por manter a confidencialidade da sua conta e
+            senha, bem como por restringir o acesso ao seu computador. Você
+            concorda em assumir responsabilidade por todas as atividades
+            realizadas com sua conta ou senha.
           </p>
           <p className="mt-8 text-sm text-gray-400">
-            Last updated: {new Date().toLocaleDateString()}
+            Última atualização: {new Date().toLocaleDateString("pt-BR")}
           </p>
         </div>
       </div>
