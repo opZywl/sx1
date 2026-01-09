@@ -56,13 +56,14 @@ router.post(
         imageUrl: req.body.imageUrl, // Store the image filename as imageUrl in the database
       };
 
-      const variations = await Variation.find({
-        type: { $in: req.body.variations },
-      });
-      if (variations.length <= 0) {
-        return res.status(400).json({ error: errors.array() });
+      if (Array.isArray(req.body.variations) && req.body.variations.length > 0) {
+        const variations = await Variation.find({
+          type: { $in: req.body.variations },
+        });
+        body.variations = variations;
+      } else {
+        body.variations = [];
       }
-      body.variations = variations;
 
       // Save the product with the image URL (filename stored in GridFS)
       product = await Product.create(body);
