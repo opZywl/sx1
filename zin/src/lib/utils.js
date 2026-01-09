@@ -38,3 +38,11 @@ export const removeKeysFromQuery = ({
     { skipNull: true }
   );
 };
+
+export const formatCurrencyBRL = (value) => {
+  const numericValue = Number(value) || 0;
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(numericValue);
+};

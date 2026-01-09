@@ -43,7 +43,7 @@ const UserLogin = () => {
       localStorage.setItem("UserCookie", data.authToken);
       navigate("/");
       toast({
-        title: "Log-in Successful!!",
+        title: "Login realizado com sucesso!",
       });
       form.reset();
       setIsUserAuthenticated(true);
@@ -56,7 +56,7 @@ const UserLogin = () => {
 
   return (
     <div className="md:min-h-[80vh] min-h-[75vh] rounded-md flex items-center justify-start flex-col mt-[50px] py-14 max-sm:w-full ">
-      <h2 className="text-3xl font-bold m-5">Log-In</h2>
+      <h2 className="text-3xl font-bold m-5">Entrar</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -67,10 +67,10 @@ const UserLogin = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your email"
+                    placeholder="Digite seu e-mail"
                     className="bg-dark-1 text-light-2 border border-dark-4"
                     {...field}
                   />
@@ -84,11 +84,11 @@ const UserLogin = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <Input
                     type={showPassword ? "text" : "password"} // Change type based on visibility
-                    placeholder="Enter your password"
+                    placeholder="Digite sua senha"
                     className="bg-dark-1 text-light-2 border border-dark-4"
                     {...field}
                   />
@@ -99,7 +99,7 @@ const UserLogin = () => {
                   onClick={() => setShowPassword((prev) => !prev)} // Toggle visibility
                   className="text-blue-600 hover:underline mt-1 text-xs mx-2"
                 >
-                  {showPassword ? "Hide Password" : "Show Password"}
+                  {showPassword ? "Ocultar senha" : "Mostrar senha"}
                 </button>
               </FormItem>
             )}
@@ -108,7 +108,7 @@ const UserLogin = () => {
             type="submit"
             className="w-1/4 mx-auto py-2 bg-blue-700 rounded-full hover:bg-blue-800"
           >
-            Login
+            Entrar
           </Button>
         </form>
       </Form>

@@ -10,6 +10,7 @@ import { Loader, Settings2 } from "lucide-react";
 import Filters from "@/zinfrontend/components/FIlters";
 import { categories, sortOptions } from "@/lib/constants";
 import SortOptions from "@/zinfrontend/components/SortOptions";
+import { formatCurrencyBRL } from "@/lib/utils";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -35,16 +36,16 @@ const AllProducts = () => {
       <div className="mb-4 mx-2 sm:hidden">
         <Drawer>
           <DrawerTrigger className="flex gap-2 items-center justify-center font-mono p-1  rounded-md">
-            Filters <Settings2 className="w-4" />
+            Filtros <Settings2 className="w-4" />
           </DrawerTrigger>
           <DrawerContent className="border-none px-7 py-8 bg-dark-6 text-white">
             <div className="flex justify-between py-5">
               <div className="">
-                <p className="text-xs my-2 text-zinc-400">CATEGORIES</p>
+                <p className="text-xs my-2 text-zinc-400">CATEGORIAS</p>
                 <Filters filters={categories} />
               </div>
               <div className="">
-                <p className="text-xs my-2 text-zinc-400 text-end">SORT BY</p>
+                <p className="text-xs my-2 text-zinc-400 text-end">ORDENAR POR</p>
                 <SortOptions sortBy={sortOptions} />
               </div>
             </div>
@@ -68,7 +69,7 @@ const AllProducts = () => {
                   {product.name}
                 </p>
                 <p className="bg-blue-700 rounded-full text-xs px-2 py-1">
-                  ₹{product.price}
+                  {formatCurrencyBRL(product.price)}
                 </p>
               </div>
             </Link>
