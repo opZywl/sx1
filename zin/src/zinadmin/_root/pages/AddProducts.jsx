@@ -30,21 +30,21 @@ import { X } from "lucide-react";
 const formSchema = z.object({
   name: z
     .string()
-    .min(1, { message: "Name must be at least 1 character long" })
-    .max(70, { message: "Name must be at most 70 characters long" }),
+    .min(1, { message: "O nome deve ter pelo menos 1 caractere" })
+    .max(70, { message: "O nome deve ter no máximo 70 caracteres" }),
   description: z
     .string()
-    .min(1, { message: "Description must be at least 1 character long" })
-    .max(100, { message: "Description must be at most 100 characters long" }),
+    .min(1, { message: "A descrição deve ter pelo menos 1 caractere" })
+    .max(100, { message: "A descrição deve ter no máximo 100 caracteres" }),
   price: z
     .string()
-    .min(1, { message: "Price must be at least 1 character long" }),
+    .min(1, { message: "Informe o preço" }),
   category: z
     .string()
-    .min(1, { message: "Category must be a non-empty string" }),
+    .min(1, { message: "A categoria deve ser informada" }),
   stock: z
     .string()
-    .min(1, { message: "Stock must be at least 1 character long" }),
+    .min(1, { message: "Informe o estoque" }),
   imageUrl: z.string(),
 });
 
@@ -96,9 +96,9 @@ const AddProducts = () => {
 
     // Add the product
     const data = await addProduct(body);
-    if (data.success) {
+    if (data && data.success) {
       toast({
-        title: "Product added successfully",
+        title: "Produto adicionado com sucesso",
       });
       form.reset();
       setUploadedImageUrl("");
@@ -106,7 +106,7 @@ const AddProducts = () => {
       setSelectedOptions([]);
     } else {
       toast({
-        title: data.error,
+        title: data?.error || "Não foi possível adicionar o produto",
       });
     }
   };
@@ -124,7 +124,7 @@ const AddProducts = () => {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error("Failed to upload image");
+        throw new Error("Falha ao enviar a imagem");
       }
 
       const data = await response.json();
@@ -132,7 +132,7 @@ const AddProducts = () => {
       setUploadedImageUrl(imageUrl); // Store the uploaded image URL
       // You can now use data.filename or whatever the server returns
     } catch (error) {
-      console.error("Error uploading image:", error);
+      console.error("Erro ao enviar a imagem:", error);
     }
   }, []);
 
@@ -167,10 +167,10 @@ const AddProducts = () => {
           name="name"
           render={({ field }) => (
             <FormItem className="col-end-3 col-start-1 ">
-              <FormLabel>Product name</FormLabel>
+              <FormLabel>Nome do produto</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter product name"
+                  placeholder="Digite o nome do produto"
                   {...field}
                   className="bg-dark-3 border border-white/20 h-12 "
                 />
@@ -184,10 +184,10 @@ const AddProducts = () => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Descrição</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter product description"
+                  placeholder="Digite a descrição do produto"
                   {...field}
                   className="bg-dark-3 border border-white/20 h-12"
                 />
@@ -201,10 +201,10 @@ const AddProducts = () => {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Price</FormLabel>
+              <FormLabel>Preço</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter product price"
+                  placeholder="Digite o preço do produto"
                   {...field}
                   className="bg-dark-3 border border-white/20 h-12"
                 />
@@ -219,10 +219,10 @@ const AddProducts = () => {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Category</FormLabel>
+              <FormLabel>Categoria</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter product category"
+                  placeholder="Digite a categoria do produto"
                   {...field}
                   className="bg-dark-3 border border-white/20 h-12"
                 />
@@ -236,10 +236,10 @@ const AddProducts = () => {
           name="stock"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Stock</FormLabel>
+              <FormLabel>Estoque</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter stock"
+                  placeholder="Digite o estoque"
                   {...field}
                   className="bg-dark-3 border border-white/20 h-12"
                 />
@@ -254,11 +254,11 @@ const AddProducts = () => {
           name="variations"
           render={({ field }) => (
             <FormItem className="col-end-3 col-start-1">
-              <FormLabel>Options</FormLabel>
+              <FormLabel>Opções</FormLabel>
               <FormControl>
                 <Select onValueChange={handleSelectChange}>
                   <SelectTrigger className="bg-dark-4 w-full">
-                    <SelectValue placeholder="Theme" />
+                    <SelectValue placeholder="Tema" />
                   </SelectTrigger>
                   <SelectContent className="bg-dark-4 text-white border-none">
                     {options.map((option) => (
@@ -293,21 +293,21 @@ const AddProducts = () => {
           name="imageUrl"
           render={({ field }) => (
             <FormItem className="col-end-3 col-start-1">
-              <FormLabel>Image</FormLabel>
+              <FormLabel>Imagem</FormLabel>
               <div
                 {...getRootProps()}
                 className="border-dashed border-2 border-gray-500 p-5 rounded-md cursor-pointer h-[300px] flex items-center justify-center max-sm:h-[150px]"
               >
                 <input {...getInputProps()} />
                 {!imagePreview && (
-                  <p>Drag & drop an image here, or click to select one</p>
+                  <p>Arraste e solte uma imagem aqui ou clique para selecionar</p>
                 )}
                 {imagePreview && (
                   <div className="mt-2">
                     <img
                       src={imagePreview}
-                      alt="Image Preview"
-                      className="h-32 object-cover rounded-md"
+                    alt="Prévia da imagem"
+                    className="h-32 object-cover rounded-md"
                     />
                   </div>
                 )}
@@ -322,7 +322,7 @@ const AddProducts = () => {
         />
 
         <Button type="submit" className="col-start-1 col-end-3 py-2">
-          Add product
+          Adicionar produto
         </Button>
       </form>
     </Form>

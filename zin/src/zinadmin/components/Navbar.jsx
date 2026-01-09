@@ -13,20 +13,20 @@ const Navbar = () => {
       <div className="tabs">
         {isAuthenticated ? (
           <Button className="px-2 py-1" onClick={logout}>
-            Logout
+            Sair
           </Button>
         ) : signUp ? (
           <>
             <Link to="/admin/login" className="mx-2">
-              <Button className="px-2 py-1">Login</Button>
+              <Button className="px-2 py-1">Entrar</Button>
             </Link>
             <Link to="/admin/signup" className="mx-2">
-              <Button className="px-2 py-1">Signup</Button>
+              <Button className="px-2 py-1">Cadastrar</Button>
             </Link>
           </>
         ) : (
           <Link to="/admin/login" className="mx-2">
-            <Button className="px-2 py-1">Login</Button>
+            <Button className="px-2 py-1">Entrar</Button>
           </Link>
         )}
       </div>

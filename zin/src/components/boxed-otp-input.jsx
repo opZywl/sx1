@@ -44,7 +44,7 @@ export function BoxedOtpInput() {
       navigate("/");
       setIsUserAuthenticated(true);
       toast({
-        title: "Sign-up successful!",
+        title: "Cadastro realizado com sucesso!",
       });
     } else {
       toast({
@@ -55,9 +55,9 @@ export function BoxedOtpInput() {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <h2 className="text-2xl font-bold">Enter OTP</h2>
+      <h2 className="text-2xl font-bold">Digite o código OTP</h2>
       <p className="text-zinc-500 text-sm">
-        An OTP has been sent to {userEmail}{" "}
+        Um código OTP foi enviado para {userEmail}{" "}
       </p>
       <div className="flex space-x-2">
         {otp.map((data, index) => (
@@ -78,7 +78,7 @@ export function BoxedOtpInput() {
         disabled={!isOtpComplete}
         className="p-2 px-4 font-sans font-semibold bg-blue-700 rounded-full"
       >
-        VERIFY
+        VERIFICAR
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, formatCurrencyBRL } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 export const BentoGrid = ({ className, children }) => {
@@ -29,7 +29,9 @@ export const BentoGridItem = ({ className, name, price, _id, imageUrl }) => {
       />
       <div className="z-10 mx-2 flex items-center gap-2 border border-light-2/20 pl-3 pr-1 py-1 rounded-full bg-zinc-600/10 backdrop-blur-lg backdrop-saturate-100">
         <p className="px-1 font-bold capitalize line-clamp-1">{name}</p>
-        <p className="bg-blue-700 font-semibold rounded-full line px-2 py-1">₹{price}</p>
+        <p className="bg-blue-700 font-semibold rounded-full line px-2 py-1">
+          {formatCurrencyBRL(price)}
+        </p>
       </div>
     </Link>
   );

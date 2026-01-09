@@ -23,7 +23,7 @@ const CartProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("UserCookie");
       if (!token) {
-        toast({title: 'Login to update cart'})
+        toast({ title: "Faça login para atualizar o carrinho" })
         return false;
       }
 
@@ -37,11 +37,11 @@ const CartProvider = ({ children }) => {
 
       const response = await data.json();
       if (!response.success) {
-        toast({title: 'Error'})
+        toast({ title: "Erro" })
         return false;
       }
 
-      toast({title: 'Item removed.'})
+      toast({ title: "Item removido." })
 
       setCartItems(response.cart.items)
       return true

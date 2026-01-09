@@ -33,7 +33,7 @@ const Nike = () => {
             transition={{ duration: 0.5, delay: 1 }}
             className="text-3xl font-bold font-mono bg-white text-black w-[70%]"
           >
-            Strike with Precision.
+            Ataque com precisão.
           </motion.p>
         </div>
         <motion.div

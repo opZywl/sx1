@@ -18,7 +18,7 @@ import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   type: z.string().min(1, {
-    message: "Username must be at least a characters.",
+    message: "O nome deve ter pelo menos 1 caractere.",
   }),
   options: z.string(),
 });
@@ -36,7 +36,7 @@ const AddVariant = () => {
     values.options = a;
     const data = await addVariant(values);
     if(data.success){
-      toast({ title: 'Variant added'})
+      toast({ title: "Variação adicionada" })
     } else{
       toast({title: data.error})
     }
@@ -50,12 +50,16 @@ const AddVariant = () => {
           name="type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input className="bg-dark-3 border border-white/20 h-12 " placeholder="shadcn" {...field} />
+                <Input
+                  className="bg-dark-3 border border-white/20 h-12 "
+                  placeholder="ex: tamanho"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                Este é o nome exibido publicamente.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -66,19 +70,22 @@ const AddVariant = () => {
           name="options"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Options</FormLabel>
+              <FormLabel>Opções</FormLabel>
               <FormControl>
-                <Input className="bg-dark-3 border border-white/20 h-12 " placeholder="shadcn" {...field} />
+                <Input
+                  className="bg-dark-3 border border-white/20 h-12 "
+                  placeholder="ex: 32gb, 64gb"
+                  {...field}
+                />
               </FormControl>
               <FormDescription className="text-sm">
-                Please seperate every option with a comma (,)
-                example: 32gb, 64gb, ...
+                Separe cada opção com uma vírgula (,). Exemplo: 32gb, 64gb, ...
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Enviar</Button>
       </form>
     </Form>
   );

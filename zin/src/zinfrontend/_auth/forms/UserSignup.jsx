@@ -66,7 +66,7 @@ const UserSignup = () => {
 
   return (
     <div className=" md:min-h-[80vh] min-h-[75vh] w-[530px] rounded-md flex items-center justify-start flex-col py-6 max-sm:w-full bg-dark-6">
-      <h2 className="text-3xl font-bold  m-5">Sign-Up</h2>
+      <h2 className="text-3xl font-bold  m-5">Criar conta</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -77,10 +77,10 @@ const UserSignup = () => {
             name="name"
             render={({ field }) => (
               <FormItem className=" col-start-1 col-end-3">
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Nome</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your Name"
+                    placeholder="Digite seu nome"
                     className="bg-dark-1 text-light-2 border border-dark-4 "
                     {...field}
                   />
@@ -94,10 +94,10 @@ const UserSignup = () => {
             name="address"
             render={({ field }) => (
               <FormItem className=" col-start-1 col-end-3">
-                <FormLabel>Address</FormLabel>
+                <FormLabel>Endereço</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your Address"
+                    placeholder="Digite seu endereço"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -111,10 +111,10 @@ const UserSignup = () => {
             name="appartment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Appartment</FormLabel>
+                <FormLabel>Apartamento</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your Appartment"
+                    placeholder="Digite seu apartamento"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -128,10 +128,10 @@ const UserSignup = () => {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel>Cidade</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your City"
+                    placeholder="Digite sua cidade"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -145,10 +145,10 @@ const UserSignup = () => {
             name="state"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>State</FormLabel>
+                <FormLabel>Estado</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your State"
+                    placeholder="Digite seu estado"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -162,10 +162,10 @@ const UserSignup = () => {
             name="ZIP"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ZIP</FormLabel>
+                <FormLabel>CEP</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your ZIP"
+                    placeholder="Digite seu CEP"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -179,10 +179,10 @@ const UserSignup = () => {
             name="phNo"
             render={({ field }) => (
               <FormItem className=" col-start-1 col-end-3">
-                <FormLabel>phNo</FormLabel>
+                <FormLabel>Telefone</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your phNo"
+                    placeholder="Digite seu telefone"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -196,10 +196,10 @@ const UserSignup = () => {
             name="email"
             render={({ field }) => (
               <FormItem className=" col-start-1 col-end-3">
-                <FormLabel>Email</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your Email"
+                    placeholder="Digite seu e-mail"
                     className="bg-dark-1 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -213,11 +213,11 @@ const UserSignup = () => {
             name="password"
             render={({ field }) => (
               <FormItem className="col-start-1 col-end-3">
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <Input
                     type={showPassword ? "text" : "password"} // Change input type based on showPassword state
-                    placeholder="Enter your password"
+                    placeholder="Digite sua senha"
                     className="bg-dark-1 text-light-2 border border-dark-4"
                     {...field}
                   />
@@ -228,7 +228,7 @@ const UserSignup = () => {
                   onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
                   className="text-blue-600 hover:underline mt-1 text-xs p-0 mx-2 bg-transparent"
                 >
-                  {showPassword ? "Hide Password" : "Show Password"}
+                  {showPassword ? "Ocultar senha" : "Mostrar senha"}
                 </Button>
               </FormItem>
             )}
@@ -238,7 +238,7 @@ const UserSignup = () => {
             type="submit"
             className="w-1/4 mx-auto py-2 bg-blue-700 rounded-full hover:bg-blue-800  col-start-1 col-end-3"
           >
-            SignUp
+            Cadastrar
           </Button>
         </form>
       </Form>

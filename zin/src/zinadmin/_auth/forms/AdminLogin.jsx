@@ -42,7 +42,7 @@ const AdminLogin = () => {
       navigate("/admin");
       toast({
         variant: "",
-        title: "Log-in Successful!!",
+        title: "Login realizado com sucesso!",
       });
       form.reset();
       setIsAuthenticated(true);
@@ -55,7 +55,7 @@ const AdminLogin = () => {
 
   return (
     <div className=" md:min-h-[80vh] min-h-[75vh] rounded-md flex  items-center justify-start flex-col mt-[50px] py-14 max-sm:w-full ">
-      <h2 className="text-3xl font-bold  m-5">Admin Log-In</h2>
+      <h2 className="text-3xl font-bold  m-5">Login de administrador</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -66,10 +66,10 @@ const AdminLogin = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your email"
+                    placeholder="Digite seu e-mail"
                     className="bg-dark-3 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -83,10 +83,10 @@ const AdminLogin = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your password"
+                    placeholder="Digite sua senha"
                     className="bg-dark-3 text-light-2 border border-dark-4   "
                     {...field}
                   />
@@ -99,7 +99,7 @@ const AdminLogin = () => {
             type="submit"
             className="w-1/4 mx-auto py-2 hover:bg-zinc-800 "
           >
-            Login
+            Entrar
           </Button>
         </form>
       </Form>
