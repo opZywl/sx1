@@ -46,3 +46,28 @@ export const formatCurrencyBRL = (value) => {
     currency: "BRL",
   }).format(numericValue);
 };
+
+const normalizeHost = (host) => {
+  if (!host) {
+    return "";
+  }
+  return host.endsWith("/") ? host.slice(0, -1) : host;
+};
+
+export const normalizeImageUrl = (imageUrl) => {
+  if (!imageUrl) {
+    return "";
+  }
+  const backendHost = normalizeHost(import.meta.env.VITE_BACKEND_HOST);
+  const frontendHost = normalizeHost(import.meta.env.VITE_FRONTEND_HOST);
+
+  if (imageUrl.startsWith("/uploads/")) {
+    return `${backendHost}${imageUrl}`;
+  }
+
+  if (frontendHost && imageUrl.startsWith(frontendHost) && imageUrl.includes("/uploads/")) {
+    return imageUrl.replace(frontendHost, backendHost);
+  }
+
+  return imageUrl;
+};

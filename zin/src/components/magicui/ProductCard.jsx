@@ -1,4 +1,4 @@
-import { cn, formatCurrencyBRL } from "@/lib/utils";
+import { cn, formatCurrencyBRL, normalizeImageUrl } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 export const ProductCard = ({ _id, name, price, imageUrl }) => {
@@ -9,7 +9,7 @@ export const ProductCard = ({ _id, name, price, imageUrl }) => {
       )}
     >
       <img
-        src={imageUrl}
+        src={normalizeImageUrl(imageUrl)}
         className=" h-[85%] w-full absolute m-auto inset-0 left-0 right-0 bottom-0 top-0 object-contain hover:scale-110 transition-all duration-300"
       />
       <div className="z-10 absolute bottom-5 left-3 mx-2 flex items-center gap-2 border border-light-2/30 pl-3 pr-1 py-1 rounded-full bg-zinc-600/10 backdrop-blur-xl backdrop-saturate-200">

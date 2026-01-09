@@ -10,7 +10,7 @@ import { Loader, Settings2 } from "lucide-react";
 import Filters from "@/zinfrontend/components/FIlters";
 import { categories, sortOptions } from "@/lib/constants";
 import SortOptions from "@/zinfrontend/components/SortOptions";
-import { formatCurrencyBRL } from "@/lib/utils";
+import { formatCurrencyBRL, normalizeImageUrl } from "@/lib/utils";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -61,7 +61,7 @@ const AllProducts = () => {
               className="relative p-7 h-[250px] xl:h-[300px] cursor-pointer overflow-hidden rounded-md border  border-dark-4 group bg-dark-1/40 flex justify-center items-center hover:border-blue-500 "
             >
               <img
-                src={product.imageUrl}
+                src={normalizeImageUrl(product.imageUrl)}
                 className=" size-[85%] absolute m-auto inset-0 left-0 right-0 bottom-0 top-0 object-contain group-hover:scale-110  transition-all duration-300"
               />
               <div className="z-5 absolute bottom-2 left-0 mx-2 flex items-center gap-1 border border-light-2/20 pl-3 pr-1 py-1 rounded-full bg-zinc-600/10 backdrop-blur-lg backdrop-saturate-100">

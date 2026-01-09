@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { addItemToCart, getProductById } from "@/lib/api/api";
-import { formUrlQuery, formatCurrencyBRL } from "@/lib/utils";
+import { formUrlQuery, formatCurrencyBRL, normalizeImageUrl } from "@/lib/utils";
 import { Loader, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -107,7 +107,7 @@ const ProductDetails = () => {
       <div className="flex max-sm:flex-col max-sm:justify-center bg-dark-2 w-[95%] xl:w-[75%] min-h-[85vh] md:max-h-[850px] mx-auto mt-5 rounded-md px-5 max-sm:py-3">
         <div className="w-[70%]  flex items-center justify-center max-sm:w-full max-sm:border-b pb-5 border-dark-5/30">
           <img
-            src={product.imageUrl}
+            src={normalizeImageUrl(product.imageUrl)}
             alt={product.name}
             className="size-[90%] object-contain max-sm:w-full"
           />
