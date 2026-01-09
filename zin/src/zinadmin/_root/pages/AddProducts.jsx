@@ -82,6 +82,20 @@ const AddProducts = () => {
   });
 
   const onSubmit = async (values) => {
+    if (!uploadedImageUrl) {
+      toast({
+        title: "Adicione uma imagem antes de salvar o produto.",
+      });
+      return;
+    }
+
+    if (selectedOptions.length === 0) {
+      toast({
+        title: "Selecione pelo menos uma variação.",
+      });
+      return;
+    }
+
     // Construct the body for adding the product
     const body = {
       name: values.name,
@@ -113,6 +127,9 @@ const AddProducts = () => {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
+    if (!file) {
+      return;
+    }
     setImagePreview(URL.createObjectURL(file)); // Set the image preview
 
     const formData = new FormData();
@@ -138,7 +155,9 @@ const AddProducts = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: {
+      "image/*": [],
+    },
     maxFiles: 1,
   });
 
