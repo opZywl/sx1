@@ -72,7 +72,7 @@ export const addProduct = async (formData) => {
     const token = localStorage.getItem("Cookie");
     if (!token) {
       console.log("Token not found");
-      return false;
+      return { success: false, error: "Sessão expirada. Faça login novamente." };
     }
     const response = await fetch(`${host}/admin/addproduct`, {
       method: "POST",
@@ -91,10 +91,24 @@ export const addProduct = async (formData) => {
       }), // Use the FormData directly
     });
 
+    if (!response.ok) {
+      const fallbackError = `Falha ao adicionar produto (${response.status}).`;
+      try {
+        const errorData = await response.json();
+        return {
+          success: false,
+          error: errorData.error || fallbackError,
+        };
+      } catch (parseError) {
+        return { success: false, error: fallbackError };
+      }
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
+    return { success: false, error: "Falha ao conectar ao servidor." };
   }
 };
 

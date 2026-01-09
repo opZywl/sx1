@@ -96,7 +96,7 @@ const AddProducts = () => {
 
     // Add the product
     const data = await addProduct(body);
-    if (data.success) {
+    if (data && data.success) {
       toast({
         title: "Produto adicionado com sucesso",
       });
@@ -106,7 +106,7 @@ const AddProducts = () => {
       setSelectedOptions([]);
     } else {
       toast({
-        title: data.error,
+        title: data?.error || "Não foi possível adicionar o produto",
       });
     }
   };
