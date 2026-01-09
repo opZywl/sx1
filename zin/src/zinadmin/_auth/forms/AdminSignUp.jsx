@@ -54,7 +54,7 @@ const AdminSignUp = () => {
       setIsAuthenticated(true);
       setSignUp(false);
       toast({
-        title: "Sign-up successful!",
+        title: "Cadastro realizado com sucesso!",
       });
     } else {
       toast({
@@ -65,7 +65,7 @@ const AdminSignUp = () => {
 
   return (
     <div className=" md:min-h-[80vh] min-h-[75vh] w-[530px] rounded-md flex items-center justify-start flex-col mt-[50px] py-14  max-sm:w-full ">
-      <h2 className="text-3xl font-bold  m-5">Admin Sign-Up</h2>
+      <h2 className="text-3xl font-bold  m-5">Cadastro de administrador</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -76,10 +76,10 @@ const AdminSignUp = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Usuário</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your username"
+                    placeholder="Digite seu usuário"
                     className="bg-dark-3 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -93,10 +93,10 @@ const AdminSignUp = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your email"
+                    placeholder="Digite seu e-mail"
                     className="bg-dark-3 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -110,10 +110,10 @@ const AdminSignUp = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Senha</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Enter your password"
+                    placeholder="Digite sua senha"
                     className="bg-dark-3 text-light-2 border border-dark-4  "
                     {...field}
                   />
@@ -127,7 +127,7 @@ const AdminSignUp = () => {
             name="role"
             render={() => (
               <FormItem>
-                <FormLabel>Role</FormLabel>
+                <FormLabel>Perfil</FormLabel>
                 <FormControl>
                   <Controller
                     name="role"
@@ -135,15 +135,15 @@ const AdminSignUp = () => {
                     render={({ field }) => (
                       <Select {...field} onValueChange={field.onChange}>
                         <SelectTrigger className="bg-dark-3 border border-dark-4">
-                          <SelectValue placeholder="Choose your role" />
+                          <SelectValue placeholder="Escolha o perfil" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem
-                            className="bg-zinc-800 text-light-2 focus:bg-zinc-900 focus:text-light-2"
-                            value="admin"
-                          >
-                            Admin
-                          </SelectItem>
+                        <SelectItem
+                          className="bg-zinc-800 text-light-2 focus:bg-zinc-900 focus:text-light-2"
+                          value="admin"
+                        >
+                          Administrador
+                        </SelectItem>
                         </SelectContent>
                       </Select>
                     )}
@@ -157,7 +157,7 @@ const AdminSignUp = () => {
             type="submit"
             className="w-1/4 mx-auto py-2 hover:bg-zinc-700 "
           >
-            SignUp
+            Cadastrar
           </Button>
         </form>
       </Form>

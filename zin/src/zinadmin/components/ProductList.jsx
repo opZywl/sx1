@@ -52,11 +52,11 @@ const ProductList = () => {
     if (result.success) {
       fetchData();
       toast({
-        title: "Product deleted successfully",
+        title: "Produto excluído com sucesso",
       });
     } else {
       toast({
-        title: "Failed to delete product",
+        title: "Falha ao excluir o produto",
       });
     }
   };
@@ -141,7 +141,7 @@ const ProductList = () => {
           ))
         ) : (
           <div className="text-3xl w-full h-full font-bold flex items-center justify-center col-start-1 text-pink-200 col-end-3">
-            <p>No products available</p>
+            <p>Nenhum produto disponível</p>
           </div>
         )}
       </div>

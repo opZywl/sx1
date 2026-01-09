@@ -46,7 +46,7 @@ const GlobalResult = ({ isSheet }) => {
         {isLoading ? (
           <div className="flex items-center justify-center gap-2 px-5">
             <Loader className=" my-2 size-5 animate-spin text-zinc-500" />
-            <p className="text-zinc-500 body-regular">searching...</p>
+            <p className="text-zinc-500 body-regular">buscando...</p>
           </div>
         ) : (
           <div className="flex flex-col">
@@ -80,7 +80,7 @@ const GlobalResult = ({ isSheet }) => {
             ) : (
               <div className="flex-center flex-col px-5">
                 <p className="text-dark200_light800 body-regular px-5 py-2.5 text-zinc-500">
-                  Result not found
+                  Nenhum resultado encontrado
                 </p>
               </div>
             )}

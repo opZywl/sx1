@@ -2,7 +2,7 @@ import React from 'react'
 
 const UpdateVariant = () => {
   return (
-    <div>UpdateVariant</div>
+    <div>Atualizar variação</div>
   )
 }
 

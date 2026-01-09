@@ -18,11 +18,11 @@ const Admins = () => {
     <div className="bg-transparent absolute inset-0 flex flex-col p-5 max-sm:p-2 min-h-full">
       <div className="flex justify-between items-center ">
         <h2 className="text-5xl m-5 font-bold pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-pink-200 to-dark-4 bg-clip-text leading-none text-transparent max-sm:text-3xl max-sm:text-center">
-          All Admins
+          Todos os administradores
         </h2>
 
         <Button>
-          Register <span className="max-sm:hidden ml-1">New Admin</span>{" "}
+          Registrar <span className="max-sm:hidden ml-1">novo admin</span>{" "}
         </Button>
       </div>
       <div className="h-full overflow-auto flex flex-col gap-3 custom-scrollbar">

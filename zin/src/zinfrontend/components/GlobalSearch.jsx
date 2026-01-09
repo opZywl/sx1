@@ -80,7 +80,7 @@ const GlobalSearch = ({isSheet}) => {
           id="global-search"
           value={search}
           tabIndex={-1}  // Prevents focus
-          placeholder="search"
+          placeholder="buscar"
           onChange={(e) => {
             setSearch(e.target.value);
             if (!isModalOpen) {

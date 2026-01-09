@@ -3,32 +3,39 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const faqs = [
   {
-    question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. For certain regions, we also offer payment options like Klarna and Afterpay."
+    question: "Quais formas de pagamento vocês aceitam?",
+    answer:
+      "Aceitamos os principais cartões de crédito (Visa, MasterCard e American Express), PayPal e Apple Pay. Em algumas regiões, também oferecemos opções como Klarna e Afterpay."
   },
   {
-    question: "How long does shipping take?",
-    answer: "Shipping times vary depending on your location and chosen shipping method. Typically, domestic orders are delivered within 3-5 business days, while international orders may take 7-14 business days. Expedited shipping options are available at checkout."
+    question: "Quanto tempo leva o envio?",
+    answer:
+      "Os prazos variam conforme sua localização e o método de envio escolhido. Em geral, pedidos nacionais são entregues em 3 a 5 dias úteis, enquanto pedidos internacionais podem levar de 7 a 14 dias úteis. Opções expressas ficam disponíveis no checkout."
   },
   {
-    question: "What is your return policy?",
-    answer: "We offer a 30-day return policy for most items. Products must be unused and in their original packaging. To initiate a return, please log into your account and follow the return instructions, or contact our customer service team."
+    question: "Qual é a política de devolução?",
+    answer:
+      "Oferecemos devolução em até 30 dias para a maioria dos itens. Os produtos devem estar sem uso e na embalagem original. Para iniciar a devolução, acesse sua conta e siga as instruções ou fale com nosso suporte."
   },
   {
-    question: "Do you offer international shipping?",
-    answer: "Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location. You can see the exact shipping cost and estimated delivery time at checkout after entering your address."
+    question: "Vocês fazem envio internacional?",
+    answer:
+      "Sim, enviamos para a maioria dos países. Os custos e prazos variam conforme o destino. Você verá o valor do frete e o prazo estimado no checkout após informar seu endereço."
   },
   {
-    question: "How can I track my order?",
-    answer: "Once your order ships, you'll receive a shipping confirmation email with a tracking number. You can use this number to track your package on our website or the carrier's site. You can also view your order status by logging into your account."
+    question: "Como posso acompanhar meu pedido?",
+    answer:
+      "Quando seu pedido for enviado, você receberá um e-mail com o código de rastreio. Com ele, você pode acompanhar o pacote em nosso site ou no site da transportadora. Também é possível ver o status do pedido ao entrar na sua conta."
   },
   {
-    question: "Are your products authentic?",
-    answer: "We only sell 100% authentic products sourced directly from the brands or their authorized distributors. We take product authenticity very seriously and have strict measures in place to ensure the genuineness of all items we sell."
+    question: "Os produtos são originais?",
+    answer:
+      "Sim. Vendemos apenas produtos 100% originais, adquiridos diretamente das marcas ou distribuidores autorizados. Levamos a autenticidade muito a sério e seguimos processos rigorosos para garantir a procedência."
   },
   {
-    question: "Do you offer gift wrapping?",
-    answer: "Yes, we offer gift wrapping services for a small additional fee. You can select this option during checkout. We'll beautifully wrap your item and can include a personalized message card upon request."
+    question: "Vocês oferecem embalagem para presente?",
+    answer:
+      "Sim, oferecemos embalagem para presente por uma pequena taxa adicional. Você pode selecionar essa opção no checkout. Nós embalamos o item com cuidado e podemos incluir um cartão com mensagem personalizada mediante solicitação."
   }
 ]
 
@@ -43,7 +50,7 @@ export default function FAQ() {
     <div className="min-h-screen bg-dark-6 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-12">
-          FAQ
+          Perguntas frequentes
         </h1>
         <div className="space-y-1">
           {faqs.map((faq, index) => (

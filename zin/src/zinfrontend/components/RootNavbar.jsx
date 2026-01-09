@@ -32,7 +32,7 @@ const RootNavbar = () => {
         <Link to={`/`} className="flex  items-center gap-3 max-sm:gap-1">
           <img src="/icons/navbar.svg" className="w-11" />
           <h2 className="font-bold line-clamp-1 max-md:hidden max-sm:block">
-            ZIN STORE
+            sx1 Imports
           </h2>
         </Link>
         <div className=" flex max-sm:hidden items-center gap-3">

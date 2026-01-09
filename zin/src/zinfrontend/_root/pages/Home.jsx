@@ -46,7 +46,7 @@ const Home = () => {
       <Nike />
       <div className="mt-2 px-3 h-full mx-auto">
         <h2 className="text-7xl m-5 font-bold pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-white font-mono to-dark-4 bg-clip-text leading-none text-transparent max-sm:text-5xl max-sm:text-center mt-20 max-w-7xl mx-auto">
-          FEATURED
+          DESTAQUES
         </h2>
         {loading ? (
           <BentoGrid className="max-w-7xl h-[80%] max-sm:min-h-screen mx-auto md:grid-cols-3 w-full">
