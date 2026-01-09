@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p>
-            © 2023-2026 sx1 Imports, Inc. Todos os direitos reservados.
+            © 2026 sx1 Imports, Inc. Todos os direitos reservados.
           </p>
         </div>
       </div>
