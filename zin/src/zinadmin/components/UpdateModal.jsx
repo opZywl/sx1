@@ -143,9 +143,10 @@ const UpdateModal = ({ product, refreshProducts }) => {
       }
 
       const data = await response.json();
-      const imageUrl = `${import.meta.env.VITE_BACKEND_HOST}/uploads/${data.filename}`;
-      setUploadedImageUrl(imageUrl); // Set uploaded image URL
-      form.setValue("imageUrl", imageUrl, { shouldValidate: true });
+      // Use the URL returned by the server (Cloudinary URL)
+      // This URL is permanent and won't disappear after server restarts
+      setUploadedImageUrl(data.filepath);
+      form.setValue("imageUrl", data.filepath, { shouldValidate: true });
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
       toast({
