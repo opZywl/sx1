@@ -20,7 +20,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-app.use("/uploads", express.static(path.join(__dirname, "../zin/public/uploads")));
+// Note: Images are now stored in Cloudinary (permanent cloud storage)
+// The /uploads static route is no longer needed for new uploads
 
 
 

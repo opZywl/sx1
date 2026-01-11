@@ -6,24 +6,34 @@ const isAdmin = require("../middleware/AdminVerify");
 const Product = require("../models/Product.model");
 const upload = require("../middleware/storage");
 const Variation = require("../models/Variation.model");
+const { uploadToCloudinary } = require("../config/cloudinary");
 
 const front_host = process.env.FRONTEND_HOST
 
 router.post("/api/upload", (req, res) => {
-  upload(req, res, (err) => {
+  upload(req, res, async (err) => {
     if (err) {
-      console.error("Multer error:", err);
+      console.error("Upload error:", err);
       return res.status(400).json({ error: err.message || "Upload failed" });
     }
     if (!req.file) {
       console.error("No file uploaded");
       return res.status(400).json({ error: "No file uploaded" });
     }
-    const backendHost = `${req.protocol}://${req.get("host")}`;
-    res.json({
-      filename: req.file.filename,
-      filepath: `${backendHost}/uploads/${req.file.filename}`,
-    });
+
+    try {
+      // Upload to Cloudinary for permanent storage
+      const result = await uploadToCloudinary(req.file.buffer, req.file.originalname);
+
+      // Return the Cloudinary URL - this is permanent and won't disappear
+      res.json({
+        filename: result.public_id,
+        filepath: result.secure_url, // Cloudinary HTTPS URL
+      });
+    } catch (cloudinaryError) {
+      console.error("Cloudinary upload error:", cloudinaryError);
+      return res.status(500).json({ error: "Failed to upload image to cloud storage" });
+    }
   });
 });
 
