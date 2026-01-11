@@ -1,4 +1,4 @@
-// @/zin-admin/lib/constants/index.js or index.ts
+// @/sx1-admin/lib/constants/index.js or index.ts
 import { AmpersandIcon, DeleteIcon, List, Plus, User } from "lucide-react";
 import { UpdateIcon } from "@radix-ui/react-icons";
 

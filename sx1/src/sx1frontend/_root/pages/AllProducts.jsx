@@ -1,15 +1,15 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { Button } from "@/components/ui/button";
 import { getProductsFrontend } from "@/lib/api/api";
-import LeftSidebar from "@/zinfrontend/components/LeftSidebar";
-import RightSidebar from "@/zinfrontend/components/RightSidebar";
+import LeftSidebar from "@/sx1frontend/components/LeftSidebar";
+import RightSidebar from "@/sx1frontend/components/RightSidebar";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Loader, Settings2 } from "lucide-react";
-import Filters from "@/zinfrontend/components/FIlters";
+import Filters from "@/sx1frontend/components/FIlters";
 import { categories, sortOptions } from "@/lib/constants";
-import SortOptions from "@/zinfrontend/components/SortOptions";
+import SortOptions from "@/sx1frontend/components/SortOptions";
 import { formatCurrencyBRL, normalizeImageUrl } from "@/lib/utils";
 
 const AllProducts = () => {

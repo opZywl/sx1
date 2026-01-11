@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { createAdminUser } from "../../../lib/api/api.js";
 import { useNavigate } from "react-router-dom";
-import { useAdminAuth } from "@/zinadmin/context/AdminAuthProvider";
+import { useAdminAuth } from "@/sx1admin/context/AdminAuthProvider";
 import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({

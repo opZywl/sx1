@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { addItemToCart, removeItemFromCart } from "@/lib/api/api";
-import { useCart } from "@/zinfrontend/context/CartContext";
+import { useCart } from "@/sx1frontend/context/CartContext";
 import { formatCurrencyBRL } from "@/lib/utils";
 
 export default function Quantity({ itemQuantity, productId, itemTotal }) {

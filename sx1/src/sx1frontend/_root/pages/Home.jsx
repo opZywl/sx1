@@ -3,7 +3,7 @@ import { ProductCard } from "@/components/magicui/ProductCard";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getProductsFrontend, shuffleArray } from "@/lib/api/api";
-import Nike from "@/zinfrontend/components/Nike";
+import Nike from "@/sx1frontend/components/Nike";
 import { useEffect, useState } from "react";
 
 const Home = () => {

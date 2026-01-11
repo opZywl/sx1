@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button.jsx";
-import { useUserAuth } from "@/zinfrontend/context/UserAuthProvider";
+import { useUserAuth } from "@/sx1frontend/context/UserAuthProvider";
 import { verifyUser } from "@/lib/api/api";
 import { toast } from "./ui/use-toast.js";
 import { useNavigate } from "react-router-dom";

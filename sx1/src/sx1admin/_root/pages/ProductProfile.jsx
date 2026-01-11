@@ -6,7 +6,7 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/components/ui/pagination";
-import ProductCard from "@/zinadmin/components/ProductCard";
+import ProductCard from "@/sx1admin/components/ProductCard";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
