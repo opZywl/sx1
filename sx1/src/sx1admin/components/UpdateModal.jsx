@@ -50,15 +50,23 @@ const formSchema = z.object({
 const UpdateModal = ({ product, refreshProducts }) => {
   const { toast } = useToast();
   const { setOpen } = useModal();
-  const [imagePreview, setImagePreview] = useState(null); // Image preview state
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(product.imageUrl); // State to hold either original or uploaded image URL
-  const [isUploading, setIsUploading] = useState(false); // Loading state for image upload
+  // Initialize preview with existing product image (Cloudinary URL)
+  const [imagePreview, setImagePreview] = useState(product.imageUrl || null);
+  // Track the actual Cloudinary URL to save
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(product.imageUrl);
+  // Track image metadata from upload
+  const [imageMetadata, setImageMetadata] = useState({
+    hash: null,
+    publicId: null,
+  });
+  const [isUploading, setIsUploading] = useState(false);
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   // Cleanup blob URL when component unmounts or preview changes
   useEffect(() => {
     return () => {
+      // Only revoke if it's a blob URL (not Cloudinary URL)
       if (imagePreview && imagePreview.startsWith("blob:")) {
         URL.revokeObjectURL(imagePreview);
       }
@@ -117,6 +125,12 @@ const UpdateModal = ({ product, refreshProducts }) => {
       return;
     }
 
+    // Additional validation - must be HTTPS
+    if (!finalImageUrl.startsWith("https://")) {
+      toast({ title: "URL de imagem inválida. Por favor, faça o upload novamente." });
+      return;
+    }
+
     const body = {
       name: values.name,
       description: values.description,
@@ -124,8 +138,17 @@ const UpdateModal = ({ product, refreshProducts }) => {
       category: values.category,
       stock: parseInt(values.stock, 10),
       variations: selectedOptions,
-      imageUrl: finalImageUrl, // Use the Cloudinary URL (permanent)
+      imageUrl: finalImageUrl,
+      // Include image metadata for tracking
+      imageHash: imageMetadata.hash,
+      imagePublicId: imageMetadata.publicId,
     };
+
+    console.log("[UpdateModal] Submitting product update:", {
+      id: product._id,
+      imageUrl: finalImageUrl,
+      imageHash: imageMetadata.hash,
+    });
 
     try {
       const update = await updateProduct(product._id, body);
@@ -134,10 +157,10 @@ const UpdateModal = ({ product, refreshProducts }) => {
         setOpen(false);
         refreshProducts();
       } else {
-        toast({ title: "Falha ao atualizar o produto" });
+        toast({ title: update.error || "Falha ao atualizar o produto" });
       }
     } catch (error) {
-      console.log(error.message)
+      console.error("[UpdateModal] Error:", error.message);
       toast({
         title: "Erro ao atualizar o produto",
         description: error.message,
@@ -152,14 +175,16 @@ const UpdateModal = ({ product, refreshProducts }) => {
       return;
     }
 
-    // Revoke old blob URL if exists
+    // Revoke old blob URL if exists (only blob URLs, not Cloudinary URLs)
     if (imagePreview && imagePreview.startsWith("blob:")) {
       URL.revokeObjectURL(imagePreview);
     }
 
-    // Set preview and start upload
-    setImagePreview(URL.createObjectURL(file));
+    // Create temporary blob preview while uploading
+    const blobUrl = URL.createObjectURL(file);
+    setImagePreview(blobUrl);
     setIsUploading(true);
+    // Don't clear uploadedImageUrl yet - keep the old one as fallback
 
     const formData = new FormData();
     formData.append("file", file);
@@ -180,22 +205,34 @@ const UpdateModal = ({ product, refreshProducts }) => {
         throw new Error("URL de imagem inválida retornada pelo servidor");
       }
 
-      // Use the Cloudinary URL - this is permanent and won't disappear
+      // Success - update with permanent Cloudinary URL
       setUploadedImageUrl(data.filepath);
+      // Now switch preview from blob to Cloudinary URL
+      URL.revokeObjectURL(blobUrl);
+      setImagePreview(data.filepath);
+      // Store metadata for database
+      setImageMetadata({
+        hash: data.imageHash || null,
+        publicId: data.publicId || null,
+      });
       form.setValue("imageUrl", data.filepath, { shouldValidate: true });
       toast({
         title: "Imagem enviada com sucesso!",
       });
     } catch (error) {
       console.error("Erro ao enviar a imagem:", error);
-      setImagePreview(null);
+      // Revert to original product image on error
+      URL.revokeObjectURL(blobUrl);
+      setImagePreview(product.imageUrl || null);
+      // Keep uploadedImageUrl as the original
+      setUploadedImageUrl(product.imageUrl);
       toast({
         title: "Não foi possível enviar a imagem. Tente novamente.",
       });
     } finally {
       setIsUploading(false);
     }
-  }, [form, toast, imagePreview]);
+  }, [form, toast, imagePreview, product.imageUrl]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -362,26 +399,27 @@ const UpdateModal = ({ product, refreshProducts }) => {
                       <FormLabel>Imagem</FormLabel>
                       <div
                           {...getRootProps()}
-                          className="border-dashed border-2 border-gray-500 p-5 rounded-md cursor-pointer h-[300px] flex items-center justify-center max-sm:h-[150px]"
+                          className="border-dashed border-2 border-gray-500 p-5 rounded-md cursor-pointer h-[300px] flex items-center justify-center max-sm:h-[150px] relative"
                       >
                         <input {...getInputProps()} />
-                        {!imagePreview && !isUploading && (
-                            <p>Arraste e solte uma imagem aqui ou clique para selecionar</p>
-                        )}
                         {isUploading && (
                             <div className="flex flex-col items-center gap-2">
                               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
                               <p>Enviando imagem...</p>
                             </div>
                         )}
-                        {imagePreview && !isUploading && (
-                            <div className="mt-2">
+                        {!isUploading && imagePreview && (
+                            <div className="flex flex-col items-center gap-2">
                               <img
                                   src={imagePreview}
                                   alt="Prévia da imagem"
                                   className="h-32 object-cover rounded-md"
                               />
+                              <p className="text-sm text-gray-400">Clique para alterar a imagem</p>
                             </div>
+                        )}
+                        {!isUploading && !imagePreview && (
+                            <p>Arraste e solte uma imagem aqui ou clique para selecionar</p>
                         )}
                       </div>
 

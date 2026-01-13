@@ -52,6 +52,7 @@ const AddProducts = () => {
     const { toast } = useToast();
     const [imagePreview, setImagePreview] = useState(null); // State to hold the image preview
     const [uploadedImageUrl, setUploadedImageUrl] = useState(""); // State to store the uploaded image URL
+    const [imageMetadata, setImageMetadata] = useState({ hash: null, publicId: null }); // Image metadata for tracking
     const [isUploading, setIsUploading] = useState(false); // Loading state for image upload
     const [options, setOptions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -117,8 +118,15 @@ const AddProducts = () => {
             stock: parseInt(values.stock, 10),
             variations: selectedOptions,
             imageUrl: uploadedImageUrl, // Use the Cloudinary URL (permanent)
+            imageHash: imageMetadata.hash, // Hash for tracking/deduplication
+            imagePublicId: imageMetadata.publicId, // Cloudinary public ID
         };
 
+        console.log("[AddProducts] Submitting product:", {
+            name: body.name,
+            imageUrl: body.imageUrl,
+            imageHash: body.imageHash,
+        });
 
         // Add the product
         const data = await addProduct(body);
@@ -128,7 +136,8 @@ const AddProducts = () => {
             });
             form.reset();
             setUploadedImageUrl("");
-            setImagePreview(false); // Reset the uploaded image URL after submission
+            setImageMetadata({ hash: null, publicId: null });
+            setImagePreview(null); // Reset the uploaded image URL after submission
             setSelectedOptions([]);
         } else {
             toast({
@@ -149,9 +158,11 @@ const AddProducts = () => {
         }
 
         // Set preview and start upload
-        setImagePreview(URL.createObjectURL(file));
+        const blobUrl = URL.createObjectURL(file);
+        setImagePreview(blobUrl);
         setIsUploading(true);
         setUploadedImageUrl(""); // Clear previous URL while uploading
+        setImageMetadata({ hash: null, publicId: null }); // Clear metadata
 
         const formData = new FormData();
         formData.append("file", file);
@@ -174,14 +185,30 @@ const AddProducts = () => {
 
             // Use the Cloudinary URL - this is permanent and won't disappear
             setUploadedImageUrl(data.filepath);
+            // Store metadata for database tracking
+            setImageMetadata({
+                hash: data.imageHash || null,
+                publicId: data.publicId || null,
+            });
+            // Switch preview from blob to Cloudinary URL
+            URL.revokeObjectURL(blobUrl);
+            setImagePreview(data.filepath);
             form.setValue("imageUrl", data.filepath, { shouldValidate: true });
+
+            console.log("[AddProducts] Image uploaded:", {
+                url: data.filepath,
+                hash: data.imageHash,
+            });
+
             toast({
                 title: "Imagem enviada com sucesso!",
             });
         } catch (error) {
-            console.error("Erro ao enviar a imagem:", error);
+            console.error("[AddProducts] Upload error:", error);
+            URL.revokeObjectURL(blobUrl);
             setImagePreview(null);
             setUploadedImageUrl("");
+            setImageMetadata({ hash: null, publicId: null });
             toast({
                 title: "Não foi possível enviar a imagem. Tente novamente.",
             });
