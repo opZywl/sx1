@@ -175,13 +175,26 @@ export const getProducts = async (currentPage) => {
 
 export const getProductsFrontend = async (params = "") => {
   try {
-    const { filter, sortBy } = params;
+    const {
+      filter,
+      sortBy,
+      minPrice,
+      maxPrice,
+      sizes = [],
+      colors = [],
+      techs = [],
+    } = params;
     const response = await fetch(`${host}/admin/productslist`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Filter: filter || "",
         Sort: sortBy || "",
+        "Min-Price": minPrice ?? "",
+        "Max-Price": maxPrice ?? "",
+        Sizes: Array.isArray(sizes) ? sizes.join(",") : sizes,
+        Colors: Array.isArray(colors) ? colors.join(",") : colors,
+        Techs: Array.isArray(techs) ? techs.join(",") : techs,
       },
     });
 

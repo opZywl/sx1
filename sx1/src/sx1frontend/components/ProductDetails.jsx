@@ -9,6 +9,7 @@ import {
   useNavigate,
   useLocation,
   useSearchParams,
+  Link,
 } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import { useWishlist } from "../context/WishlistContext.jsx";
@@ -167,6 +168,20 @@ const ProductDetails = () => {
         <div className="w-1/2 py-12 max-sm:w-full max-sm:p-0">
           <div className="mx-3 py-6 flex flex-col gap-3 border-b border-dark-5/30 max-sm:flex-row max-sm:justify-between max-sm:items-center max-sm:border-none max-sm:py-5">
             <div className="flex flex-col gap-2">
+              <nav className="text-xs text-zinc-400 flex items-center gap-2">
+                <Link to="/" className="hover:text-white">
+                  Home
+                </Link>
+                <span>/</span>
+                <Link
+                  to={`/allproducts/?filter=${product.category}`}
+                  className="hover:text-white"
+                >
+                  {product.category}
+                </Link>
+                <span>/</span>
+                <span className="text-zinc-300">{product.name}</span>
+              </nav>
               <h1 className="text-5xl font-bold text-wrap max-sm:text-2xl capitalize">
                 {product.name}
               </h1>
