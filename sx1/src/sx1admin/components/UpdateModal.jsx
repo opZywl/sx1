@@ -109,9 +109,18 @@ const UpdateModal = ({ product, refreshProducts }) => {
     },
   });
 
+  // Helper to normalize image URL (convert HTTP to HTTPS)
+  const normalizeUrl = (url) => {
+    if (!url) return url;
+    if (url.startsWith("http://")) {
+      return url.replace("http://", "https://");
+    }
+    return url;
+  };
+
   // Submit handler
   async function onSubmit(values) {
-    const finalImageUrl = uploadedImageUrl || product.imageUrl;
+    let finalImageUrl = uploadedImageUrl || product.imageUrl;
 
     // Validate that we have a proper URL (not a blob URL)
     if (!finalImageUrl) {
@@ -125,11 +134,8 @@ const UpdateModal = ({ product, refreshProducts }) => {
       return;
     }
 
-    // Additional validation - must be HTTPS
-    if (!finalImageUrl.startsWith("https://")) {
-      toast({ title: "URL de imagem inválida. Por favor, faça o upload novamente." });
-      return;
-    }
+    // Normalize HTTP to HTTPS for old URLs
+    finalImageUrl = normalizeUrl(finalImageUrl);
 
     const body = {
       name: values.name,
@@ -227,7 +233,8 @@ const UpdateModal = ({ product, refreshProducts }) => {
       // Keep uploadedImageUrl as the original
       setUploadedImageUrl(product.imageUrl);
       toast({
-        title: "Não foi possível enviar a imagem. Tente novamente.",
+        title: "Erro no upload da imagem",
+        description: "Verifique se o Cloudinary está configurado no servidor. Você ainda pode salvar sem alterar a imagem.",
       });
     } finally {
       setIsUploading(false);
