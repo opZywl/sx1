@@ -1,11 +1,26 @@
 const cloudinary = require("cloudinary").v2;
 const crypto = require("crypto");
 
+// Log Cloudinary configuration status (without exposing secrets)
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = process.env.CLOUDINARY_API_KEY;
+const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+console.log("[Cloudinary] Configuration check:", {
+  cloud_name: cloudName ? `${cloudName.substring(0, 4)}...` : "MISSING",
+  api_key: apiKey ? `${apiKey.substring(0, 4)}...` : "MISSING",
+  api_secret: apiSecret ? "SET" : "MISSING",
+});
+
+if (!cloudName || !apiKey || !apiSecret) {
+  console.error("[Cloudinary] ERROR: Missing required environment variables!");
+}
+
 // Configure Cloudinary with environment variables
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
 });
 
 // Generate a unique hash from image buffer for deduplication and tracking
