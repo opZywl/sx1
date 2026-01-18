@@ -60,8 +60,11 @@ const AllProducts = () => {
   }, [filter, sortBy, minPrice, maxPrice, sizes, colors, techs]);
 
   const filteredProducts = useMemo(() => {
-    const matchesCategory = (product) =>
-      filter.length === 0 || filter.includes(product.category);
+    const matchesCategory = (product) => {
+      if (filter.length === 0) return true;
+      const category = product.category?.toLowerCase() ?? "";
+      return filter.some((item) => item.toLowerCase() === category);
+    };
 
     const matchesSizes = (product) => {
       if (sizes.length === 0) return true;

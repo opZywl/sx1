@@ -36,52 +36,66 @@ const RootNavbar = () => {
   const [promoIndex, setPromoIndex] = useState(0);
 
   const promoMessages = [
-    "Frete grátis para membros nas compras acima de R$ 299",
-    "Parcelamento em até 10x sem juros",
+    "Frete grátis para todo Brasil",
+    "Parcelamento em até 12x",
     "Troca fácil em até 30 dias",
   ];
 
   const megaMenuItems = [
     {
-      label: "Masculino",
-      href: "/allproducts/?filter=mens",
+      label: "Camisetas Retro",
+      href: "/allproducts/?filter=Camisetas%20Retro",
       links: [
-        { label: "Camisetas Retro", href: "/allproducts/?filter=mens" },
-        { label: "Times", href: "/allproducts/?filter=mens" },
-        { label: "Copa", href: "/allproducts/?filter=mens" },
-        { label: "Sneakers", href: "/allproducts/?filter=footwear" },
+        { label: "Seleção Brasileira", href: "/allproducts/?filter=Camisetas%20Retro" },
+        { label: "Clássicos Europeus", href: "/allproducts/?filter=Camisetas%20Retro" },
+        { label: "Edições Limitadas", href: "/allproducts/?filter=Camisetas%20Retro" },
+        { label: "Colecionáveis", href: "/allproducts/?filter=Camisetas%20Retro" },
       ],
       highlight: {
-        title: "Novidades Masculinas",
-        description: "Os lançamentos que estão dominando o feed.",
+        title: "Retro Essentials",
+        description: "A coleção que resgata os anos de ouro do futebol.",
       },
     },
     {
-      label: "Feminino",
-      href: "/allproducts/?filter=womens",
+      label: "Times",
+      href: "/allproducts/?filter=Times",
       links: [
-        { label: "Conjuntos", href: "/allproducts/?filter=womens" },
-        { label: "Lifestyle", href: "/allproducts/?filter=womens" },
-        { label: "Essenciais", href: "/allproducts/?filter=womens" },
-        { label: "Calçados", href: "/allproducts/?filter=footwear" },
+        { label: "Brasileirão", href: "/allproducts/?filter=Times" },
+        { label: "Europa", href: "/allproducts/?filter=Times" },
+        { label: "Seleções", href: "/allproducts/?filter=Times" },
+        { label: "Treino", href: "/allproducts/?filter=Times" },
       ],
       highlight: {
-        title: "Estilo Feminino",
-        description: "Looks prontos para o dia a dia e treino.",
+        title: "Favoritos da Torcida",
+        description: "Camisas atuais dos times mais pedidos.",
       },
     },
     {
-      label: "Infantil",
-      href: "/allproducts/?filter=kids",
+      label: "Copa",
+      href: "/allproducts/?filter=Copa",
       links: [
-        { label: "Mini Fans", href: "/allproducts/?filter=kids" },
-        { label: "Escola & Rolê", href: "/allproducts/?filter=kids" },
-        { label: "Conforto", href: "/allproducts/?filter=kids" },
-        { label: "Calçados", href: "/allproducts/?filter=footwear" },
+        { label: "Uniformes Oficiais", href: "/allproducts/?filter=Copa" },
+        { label: "Coleções especiais", href: "/allproducts/?filter=Copa" },
+        { label: "Terceiros Kits", href: "/allproducts/?filter=Copa" },
+        { label: "Limited Drops", href: "/allproducts/?filter=Copa" },
       ],
       highlight: {
-        title: "Kids Club",
-        description: "Cores vibrantes e conforto para brincar.",
+        title: "Copa Collection",
+        description: "Modelos inspirados nos maiores torneios.",
+      },
+    },
+    {
+      label: "Sneakers",
+      href: "/allproducts/?filter=Sneakers",
+      links: [
+        { label: "Lifestyle", href: "/allproducts/?filter=Sneakers" },
+        { label: "Performance", href: "/allproducts/?filter=Sneakers" },
+        { label: "Futsal", href: "/allproducts/?filter=Sneakers" },
+        { label: "Treino", href: "/allproducts/?filter=Sneakers" },
+      ],
+      highlight: {
+        title: "Sneaker Lab",
+        description: "Os drops mais desejados da temporada.",
       },
     },
   ];
