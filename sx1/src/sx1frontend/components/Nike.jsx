@@ -73,7 +73,7 @@ const Nike = () => {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 2.25 }}
-          src="/images/NOVA_BRASIL_FRONT.png"
+          src="/images/brasil.png"
           alt=""
           className="w-[100%] object-contain z-10 max-sm:my-36 mt-48"
         />

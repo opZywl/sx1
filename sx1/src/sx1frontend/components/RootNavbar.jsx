@@ -36,7 +36,7 @@ const RootNavbar = () => {
   const [promoIndex, setPromoIndex] = useState(0);
 
   const promoMessages = [
-    "Frete grátis para todo Brasil",
+    "Frete grátis para todo o Brasil",
     "Parcelamento em até 12x",
     "Troca fácil em até 30 dias",
   ];
