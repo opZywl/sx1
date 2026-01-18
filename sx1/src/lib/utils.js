@@ -58,16 +58,25 @@ export const normalizeImageUrl = (imageUrl) => {
   if (!imageUrl) {
     return "";
   }
+
+  let url = imageUrl;
   const backendHost = normalizeHost(import.meta.env.VITE_BACKEND_HOST);
   const frontendHost = normalizeHost(import.meta.env.VITE_FRONTEND_HOST);
 
-  if (imageUrl.startsWith("/uploads/")) {
-    return `${backendHost}${imageUrl}`;
+  // Handle relative /uploads/ paths
+  if (url.startsWith("/uploads/")) {
+    url = `${backendHost}${url}`;
   }
 
-  if (frontendHost && imageUrl.startsWith(frontendHost) && imageUrl.includes("/uploads/")) {
-    return imageUrl.replace(frontendHost, backendHost);
+  // Handle frontend host URLs with /uploads/
+  if (frontendHost && url.startsWith(frontendHost) && url.includes("/uploads/")) {
+    url = url.replace(frontendHost, backendHost);
   }
 
-  return imageUrl;
+  // Convert HTTP to HTTPS for all URLs (fix Mixed Content issues)
+  if (url.startsWith("http://")) {
+    url = url.replace("http://", "https://");
+  }
+
+  return url;
 };
