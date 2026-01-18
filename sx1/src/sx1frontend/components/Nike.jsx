@@ -33,7 +33,7 @@ const Nike = () => {
             transition={{ duration: 0.5, delay: 1 }}
             className="text-3xl font-bold font-mono bg-white text-black w-[70%]"
           >
-            TOP 01 EM IMPORTS
+            TOP 1 EM IMPORTS
           </motion.p>
         </div>
         <motion.div
@@ -73,7 +73,7 @@ const Nike = () => {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 2.25 }}
-          src="/images/brasil.png"
+          src="/images/NOVA_BRASIL_FRONT.png"
           alt=""
           className="w-[100%] object-contain z-10 max-sm:my-36 mt-48"
         />
