@@ -27,6 +27,8 @@ const ProductSchema = new Schema({
   imageHash: { type: String, index: true },
   // Cloudinary public_id for management
   imagePublicId: { type: String },
+  // Featured position on home page (1, 2, or 3) - null means not featured
+  featuredPosition: { type: Number, min: 1, max: 3, default: null },
   variations: [{ type: Schema.Types.ObjectId, ref: 'Variation', required: true }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

@@ -222,6 +222,52 @@ export const getProductById = async (productId) => {
   }
 };
 
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await fetch(`${host}/admin/featured`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch featured products");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { products: [] };
+  }
+};
+
+export const setFeaturedProduct = async (productId, position) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      console.log("Token not found");
+      return { success: false, error: "Sessão expirada. Faça login novamente." };
+    }
+
+    const response = await fetch(`${host}/admin/setfeatured/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+      body: JSON.stringify({ position }),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao definir produto em destaque." };
+  }
+};
+
 export const deleteProduct = async (id) => {
   try {
     const token = localStorage.getItem("Cookie");
