@@ -68,7 +68,7 @@ export const getAdmins = async () => {
 export const addProduct = async (formData) => {
   try {
     const { name, description, price, category, stock, imageUrl, variations, imageHash, imagePublicId } =
-      formData;
+        formData;
     const token = localStorage.getItem("Cookie");
     if (!token) {
       console.log("Token not found");
@@ -190,11 +190,12 @@ export const getProductsFrontend = async (params = "") => {
         "Content-Type": "application/json",
         Filter: filter || "",
         Sort: sortBy || "",
-        "Min-Price": minPrice ?? "",
-        "Max-Price": maxPrice ?? "",
-        Sizes: Array.isArray(sizes) ? sizes.join(",") : sizes,
-        Colors: Array.isArray(colors) ? colors.join(",") : colors,
-        Techs: Array.isArray(techs) ? techs.join(",") : techs,
+       // "Min-Price": minPrice ?? "",
+    //    "Max-Price": maxPrice ?? "",
+      //  Sizes: Array.isArray(sizes) ? sizes.join(",") : sizes,
+    //    Colors: Array.isArray(colors) ? colors.join(",") : colors,
+    //    Techs: Array.isArray(techs) ? techs.join(",") : techs,
+    //    Techs: Array.isArray(techs) ? techs.join(",") : techs,
       },
     });
 
@@ -335,9 +336,9 @@ export const globalSearch = async (params) => {
 
 export const shuffleArray = (arr) => {
   return arr
-    .map((item) => ({ item, sortKey: Math.random() })) // Create an array of objects with random sort keys
-    .sort((a, b) => a.sortKey - b.sortKey) // Sort based on random keys
-    .map(({ item }) => item); // Extract the original items after sorting
+      .map((item) => ({ item, sortKey: Math.random() })) // Create an array of objects with random sort keys
+      .sort((a, b) => a.sortKey - b.sortKey) // Sort based on random keys
+      .map(({ item }) => item); // Extract the original items after sorting
 };
 
 export const confirmUser = async (token) => {
@@ -381,7 +382,7 @@ export const loginUser = async (params) => {
 
 export const createUser = async (params) => {
   const { name, address, appartment, city, state, ZIP, phNo, email, password } =
-    params;
+      params;
   const response = await fetch(`${host}/user/signup`, {
     method: "POST",
     headers: {
