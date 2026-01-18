@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "@/sx1frontend/components/ScrollToTop.jsx";
 import UserAuthProvider from "@/sx1frontend/context/UserAuthProvider.jsx";
 import CartProvider from "@/sx1frontend/context/CartContext.jsx";
+import WishlistProvider from "@/sx1frontend/context/WishlistContext.jsx";
 import RootLayout from "@/sx1frontend/_root/RootLayout.jsx";
 import Home from "@/sx1frontend/_root/pages/Home.jsx";
 import ProductDetails from "@/sx1frontend/components/ProductDetails.jsx";
@@ -40,7 +41,9 @@ function App() {
           element={
             <UserAuthProvider>
               <CartProvider>
-                <RootLayout />
+                <WishlistProvider>
+                  <RootLayout />
+                </WishlistProvider>
               </CartProvider>
             </UserAuthProvider>
           }
@@ -59,7 +62,9 @@ function App() {
           element={
             <UserAuthProvider>
               <CartProvider>
-                <UserAuthLayout />
+                <WishlistProvider>
+                  <UserAuthLayout />
+                </WishlistProvider>
               </CartProvider>
             </UserAuthProvider>
           }

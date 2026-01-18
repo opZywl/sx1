@@ -12,16 +12,18 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { useUserAuth } from "../context/UserAuthProvider.jsx";
-import { LogIn, LogOut, ShoppingCart } from "lucide-react";
+import { Heart, LogIn, LogOut, ShoppingCart } from "lucide-react";
 import Cart from "./Cart.jsx";
 import MobileNav from "./MobileNav.jsx";
 import { useDeviceWidth } from "../hooks/useDeviceWidth.jsx";
 import { useCart } from "../context/CartContext.jsx";
+import { useWishlist } from "../context/WishlistContext.jsx";
 
 const RootNavbar = () => {
   const { isUserAuthenticated, userLogout } = useUserAuth();
   const isMobile = useDeviceWidth();
   const { cartItems } = useCart();
+  const { wishlistItems } = useWishlist();
 
   return (
     <nav className="bg-dark-6 max-sm:absolute z-20 top-0 max-sm:gap-1 py-1 pt-3 w-full flex items-center justify-between max-sm:px-3 px-6">
@@ -94,6 +96,22 @@ const RootNavbar = () => {
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
+
+        <Button
+          className="sm:border hover:bg-transparent group h-full border-dark-4 bg-dark-6 px-2 relative"
+          aria-label="Lista de desejos"
+        >
+          {wishlistItems.length <= 0 ? (
+            <Heart className="sm:max-w-4" />
+          ) : (
+            <div className="">
+              <Heart className="sm:max-w-4" />
+              <div className="absolute -top-1.5 -right-0 text-xs font-mono">
+                {wishlistItems.length}
+              </div>
+            </div>
+          )}
+        </Button>
 
         <Sheet>
           <SheetTrigger className="h-full" asChild>
