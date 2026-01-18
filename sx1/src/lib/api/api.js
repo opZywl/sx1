@@ -67,7 +67,7 @@ export const getAdmins = async () => {
 
 export const addProduct = async (formData) => {
   try {
-    const { name, description, price, category, stock, imageUrl, variations } =
+    const { name, description, price, category, stock, imageUrl, variations, imageHash, imagePublicId } =
       formData;
     const token = localStorage.getItem("Cookie");
     if (!token) {
@@ -88,7 +88,9 @@ export const addProduct = async (formData) => {
         stock,
         imageUrl,
         variations,
-      }), // Use the FormData directly
+        imageHash,
+        imagePublicId,
+      }),
     });
 
     if (!response.ok) {
@@ -120,8 +122,6 @@ export const updateProduct = async (id, product) => {
       return false;
     }
 
-
-
     const body = {
       name: product.name,
       description: product.description,
@@ -130,8 +130,9 @@ export const updateProduct = async (id, product) => {
       stock: product.stock,
       imageUrl: product.imageUrl,
       variations: product.variations,
+      imageHash: product.imageHash,
+      imagePublicId: product.imagePublicId,
     };
-
 
     const response = await fetch(`${host}/admin/updateproduct/${id}`, {
       method: "PUT",
