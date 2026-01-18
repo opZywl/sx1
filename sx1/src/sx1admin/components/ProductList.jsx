@@ -1,18 +1,24 @@
 // components/ProductList.jsx
-import { deleteProduct, getProducts } from "@/lib/api/api";
+import { deleteProduct, getProducts, setFeaturedProduct } from "@/lib/api/api";
 import { normalizeImageUrl } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationItem, 
+  PaginationItem,
 } from "@/components/ui/pagination";
 import { useLocation } from "react-router-dom";
 import UpdateModal from "./UpdateModal.jsx";
 import { Button } from "@/components/ui/button";
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal";
 import { toast } from "@/components/ui/use-toast";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, Star } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -62,7 +68,21 @@ const ProductList = () => {
     }
   };
 
-
+  const handleSetFeatured = async (productId, position) => {
+    const result = await setFeaturedProduct(productId, position);
+    if (result.success) {
+      fetchData();
+      toast({
+        title: position
+          ? `Produto fixado na posição ${position} de destaque`
+          : "Produto removido dos destaques",
+      });
+    } else {
+      toast({
+        title: result.error || "Falha ao definir destaque",
+      });
+    }
+  };
 
   return (
     <div className="absolute inset-0 p-5 max-sm:p-2 min-h-full">
@@ -100,10 +120,70 @@ const ProductList = () => {
                   {product.description.length < 50 ? "" : "..."}
                 </p>
               </div>
-              <div className="flex items-center justify-center w-1/4">
+              <div className="flex items-center justify-center w-1/4 gap-2">
                 {pathname === "/admin/updateproducts" && (
-                  // interraction button
-                  <div className="h-full w-full flex items-center justify-center">
+                  // interraction buttons
+                  <div className="h-full w-full flex items-center justify-center gap-2">
+                    {/* Featured dropdown */}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          className={`bg-transparent p-2 ${
+                            product.featuredPosition
+                              ? "text-yellow-400"
+                              : "text-gray-400"
+                          }`}
+                          title={
+                            product.featuredPosition
+                              ? `Destaque ${product.featuredPosition}`
+                              : "Fixar em destaque"
+                          }
+                        >
+                          <Star
+                            className="h-5 w-5"
+                            fill={product.featuredPosition ? "currentColor" : "none"}
+                          />
+                          {product.featuredPosition && (
+                            <span className="text-xs ml-1">
+                              {product.featuredPosition}
+                            </span>
+                          )}
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="bg-dark-4 border-dark-3">
+                        <DropdownMenuItem
+                          className="cursor-pointer hover:bg-dark-3"
+                          onClick={() => handleSetFeatured(product._id, 1)}
+                        >
+                          <Star className="h-4 w-4 mr-2 text-yellow-400" />
+                          Destaque 1 (Principal)
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="cursor-pointer hover:bg-dark-3"
+                          onClick={() => handleSetFeatured(product._id, 2)}
+                        >
+                          <Star className="h-4 w-4 mr-2 text-yellow-400" />
+                          Destaque 2
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="cursor-pointer hover:bg-dark-3"
+                          onClick={() => handleSetFeatured(product._id, 3)}
+                        >
+                          <Star className="h-4 w-4 mr-2 text-yellow-400" />
+                          Destaque 3
+                        </DropdownMenuItem>
+                        {product.featuredPosition && (
+                          <DropdownMenuItem
+                            className="cursor-pointer hover:bg-dark-3 text-red-400"
+                            onClick={() => handleSetFeatured(product._id, null)}
+                          >
+                            Remover destaque
+                          </DropdownMenuItem>
+                        )}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    {/* Edit button */}
                     <Modal>
                       <ModalTrigger className="bg-transparent flex justify-center">
                         <img

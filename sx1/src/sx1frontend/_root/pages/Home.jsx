@@ -2,39 +2,82 @@ import Marquee from "@/components/magicui/marquee";
 import { ProductCard } from "@/components/magicui/ProductCard";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getProductsFrontend, shuffleArray } from "@/lib/api/api";
+import { getFeaturedProducts, getProductsFrontend, shuffleArray } from "@/lib/api/api";
 import Nike from "@/sx1frontend/components/Nike";
 import { useEffect, useState } from "react";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const randomProducts = shuffleArray(products).slice(0, 3);
+  // Build display products: use featured first, fill remaining with random
+  const buildDisplayProducts = () => {
+    // Create array with 3 slots
+    const display = [null, null, null];
 
-  // Assign className to the first random product
-  const displayProducts = randomProducts.map((product, index) => {
-    let className;
-    if (index === 0) {
-      className =`md:col-start-1 md:row-start-1 md:col-end-3 md:row-end-3 ${!loading && "animate-slideRight duration-1000"}`;
-    } else if (index === 1) {
-      className = !loading && "animate-slideLeft duration-1000";
-    } else if (index === 2) {
-      className = !loading && "animate-slideUp duration-1000";
+    // Place featured products in their fixed positions
+    featuredProducts.forEach((product) => {
+      if (product.featuredPosition >= 1 && product.featuredPosition <= 3) {
+        display[product.featuredPosition - 1] = product;
+      }
+    });
+
+    // Get non-featured products to fill empty slots
+    const featuredIds = featuredProducts.map((p) => p._id);
+    const nonFeatured = shuffleArray(
+      products.filter((p) => !featuredIds.includes(p._id))
+    );
+
+    // Fill empty slots with random products
+    let nonFeaturedIndex = 0;
+    for (let i = 0; i < 3; i++) {
+      if (!display[i] && nonFeaturedIndex < nonFeatured.length) {
+        display[i] = nonFeatured[nonFeaturedIndex];
+        nonFeaturedIndex++;
+      }
     }
-    return {
-      ...product,
-      className,
-    };
-  });
+
+    // Filter out null values and add classes
+    return display.filter(Boolean).map((product, index) => {
+      let className;
+      if (index === 0) {
+        className = `md:col-start-1 md:row-start-1 md:col-end-3 md:row-end-3 ${
+          !loading && "animate-slideRight duration-1000"
+        }`;
+      } else if (index === 1) {
+        className = !loading && "animate-slideLeft duration-1000";
+      } else if (index === 2) {
+        className = !loading && "animate-slideUp duration-1000";
+      }
+      return {
+        ...product,
+        className,
+      };
+    });
+  };
+
+  const displayProducts = buildDisplayProducts();
 
   const fetchProducts = async () => {
-    setLoading(true)
-    const data = await getProductsFrontend();
-    if (data && data.products) {
-      setProducts(data.products);
+    setLoading(true);
+    try {
+      // Fetch both featured and all products
+      const [featuredData, allData] = await Promise.all([
+        getFeaturedProducts(),
+        getProductsFrontend(),
+      ]);
+
+      if (featuredData && featuredData.products) {
+        setFeaturedProducts(featuredData.products);
+      }
+      if (allData && allData.products) {
+        setProducts(allData.products);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   useEffect(() => {

@@ -328,4 +328,70 @@ router.post("/getproductbyid", async (req, res) => {
   }
 });
 
+// Get featured products for home page
+router.get("/featured", async (req, res) => {
+  try {
+    const featuredProducts = await Product.find({
+      featuredPosition: { $in: [1, 2, 3] }
+    })
+    .sort({ featuredPosition: 1 })
+    .populate('variations');
+
+    res.status(200).json({ success: true, products: featuredProducts });
+  } catch (error) {
+    console.error("[Featured] Error:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Set featured position for a product
+router.put(
+  "/setfeatured/:id",
+  fetchAdminUser,
+  isAdmin,
+  async (req, res) => {
+    const { id } = req.params;
+    const { position } = req.body; // position can be 1, 2, 3, or null to remove
+
+    try {
+      // Validate position
+      if (position !== null && ![1, 2, 3].includes(position)) {
+        return res.status(400).json({ error: "Position must be 1, 2, 3, or null" });
+      }
+
+      // Find the product
+      let product = await Product.findById(id);
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+
+      // If setting a position (not removing), clear that position from any other product
+      if (position !== null) {
+        await Product.updateMany(
+          { featuredPosition: position, _id: { $ne: id } },
+          { $set: { featuredPosition: null } }
+        );
+      }
+
+      // Update the product's featured position
+      product = await Product.findByIdAndUpdate(
+        id,
+        { featuredPosition: position },
+        { new: true }
+      ).populate('variations');
+
+      console.log("[SetFeatured] Product featured position updated:", {
+        id: product._id,
+        name: product.name,
+        position: product.featuredPosition,
+      });
+
+      res.status(200).json({ success: true, product });
+    } catch (error) {
+      console.error("[SetFeatured] Error:", error.message);
+      res.status(500).json({ error: error.message || "Internal server error" });
+    }
+  }
+);
+
 module.exports = router;
