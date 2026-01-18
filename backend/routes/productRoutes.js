@@ -61,8 +61,13 @@ router.post("/api/upload", (req, res) => {
         publicId: result.public_id,  // Cloudinary public ID
       });
     } catch (cloudinaryError) {
-      console.error("[Upload] Cloudinary error:", cloudinaryError);
-      return res.status(500).json({ error: "Failed to upload image to cloud storage" });
+      console.error("[Upload] Cloudinary error:", cloudinaryError.message || cloudinaryError);
+      // Return more detailed error for debugging
+      const errorMessage = cloudinaryError.message || "Failed to upload image to cloud storage";
+      return res.status(500).json({
+        error: errorMessage,
+        details: process.env.NODE_ENV !== 'production' ? cloudinaryError.toString() : undefined
+      });
     }
   });
 });

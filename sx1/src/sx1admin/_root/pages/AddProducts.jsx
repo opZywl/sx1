@@ -172,14 +172,17 @@ const AddProducts = () => {
                 method: "POST",
                 body: formData,
             });
-            if (!response.ok) {
-                throw new Error("Falha ao enviar a imagem");
-            }
 
             const data = await response.json();
 
+            if (!response.ok) {
+                console.error("[AddProducts] Server error:", data);
+                throw new Error(data.error || "Falha ao enviar a imagem");
+            }
+
             // Validate that we got a proper Cloudinary URL
             if (!data.filepath || !data.filepath.startsWith("https://")) {
+                console.error("[AddProducts] Invalid response:", data);
                 throw new Error("URL de imagem inválida retornada pelo servidor");
             }
 
@@ -210,7 +213,8 @@ const AddProducts = () => {
             setUploadedImageUrl("");
             setImageMetadata({ hash: null, publicId: null });
             toast({
-                title: "Não foi possível enviar a imagem. Tente novamente.",
+                title: "Erro no upload da imagem",
+                description: error.message || "Tente novamente.",
             });
         } finally {
             setIsUploading(false);

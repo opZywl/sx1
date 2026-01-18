@@ -200,14 +200,17 @@ const UpdateModal = ({ product, refreshProducts }) => {
         method: "POST",
         body: formData,
       });
-      if (!response.ok) {
-        throw new Error("Falha ao enviar a imagem");
-      }
 
       const data = await response.json();
 
+      if (!response.ok) {
+        console.error("[Upload] Server error:", data);
+        throw new Error(data.error || "Falha ao enviar a imagem");
+      }
+
       // Validate that we got a proper Cloudinary URL
       if (!data.filepath || !data.filepath.startsWith("https://")) {
+        console.error("[Upload] Invalid response:", data);
         throw new Error("URL de imagem inválida retornada pelo servidor");
       }
 
@@ -234,7 +237,7 @@ const UpdateModal = ({ product, refreshProducts }) => {
       setUploadedImageUrl(product.imageUrl);
       toast({
         title: "Erro no upload da imagem",
-        description: "Verifique se o Cloudinary está configurado no servidor. Você ainda pode salvar sem alterar a imagem.",
+        description: error.message || "Verifique se o Cloudinary está configurado no servidor.",
       });
     } finally {
       setIsUploading(false);
