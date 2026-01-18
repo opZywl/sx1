@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { getAdmins } from "@/lib/api/api";
 import { useEffect, useState } from "react";
+import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal";
+import RegisterAdminModal from "@/sx1admin/components/RegisterAdminModal";
 
 const Admins = () => {
   const [admins, setAdmins] = useState([]);
@@ -21,9 +22,14 @@ const Admins = () => {
           Todos os administradores
         </h2>
 
-        <Button>
-          Registrar <span className="max-sm:hidden ml-1">novo admin</span>{" "}
-        </Button>
+        <Modal>
+          <ModalTrigger className="bg-white text-black px-4 py-2 rounded-md hover:bg-zinc-200 transition-colors">
+            Registrar <span className="max-sm:hidden ml-1">novo admin</span>
+          </ModalTrigger>
+          <ModalBody className="bg-dark-3">
+            <RegisterAdminModal onSuccess={updateAdmins} />
+          </ModalBody>
+        </Modal>
       </div>
       <div className="h-full overflow-auto flex flex-col gap-3 custom-scrollbar">
         {admins.length > 0 &&
