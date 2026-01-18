@@ -12,7 +12,7 @@ import UpdateModal from "./UpdateModal.jsx";
 import { Button } from "@/components/ui/button";
 import { Modal, ModalBody, ModalTrigger } from "@/components/ui/animated-modal";
 import { toast } from "@/components/ui/use-toast";
-import { ChevronLeftIcon, ChevronRightIcon, Star } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, Star, Trash2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -201,6 +201,15 @@ const ProductList = () => {
                         />
                       </ModalBody>
                     </Modal>
+
+                    {/* Delete button */}
+                    <Button
+                      className="bg-transparent p-2 text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                      onClick={() => handleDelete(product._id)}
+                      title="Excluir produto"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </Button>
                   </div>
                 )}
                 {pathname === "/admin/deleteproducts" && (
