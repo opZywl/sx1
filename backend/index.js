@@ -32,6 +32,7 @@ app.use("/", require("./routes/searchRoute"));
 app.use("/user", require("./routes/userRoutes"));
 app.use("/cart", require("./routes/cartRoutes"));
 app.use("/variations", require("./routes/variationRoute"));
+app.use("/categories", require("./routes/categoryRoutes"));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

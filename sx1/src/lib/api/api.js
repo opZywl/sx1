@@ -559,3 +559,190 @@ export const addVariant = async(values) => {
     console.log(error)
   }
 }
+
+// ==================== CATEGORY API ====================
+
+export const getCategories = async () => {
+  try {
+    const response = await fetch(`${host}/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch categories");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { categories: [] };
+  }
+};
+
+export const getCategoriesAdmin = async () => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    const response = await fetch(`${host}/categories/admin`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch categories");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { categories: [] };
+  }
+};
+
+export const createCategory = async (categoryData) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+      body: JSON.stringify(categoryData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao criar categoria" };
+  }
+};
+
+export const updateCategory = async (id, categoryData) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+      body: JSON.stringify(categoryData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao atualizar categoria" };
+  }
+};
+
+export const deleteCategory = async (id) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        Token: token,
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao excluir categoria" };
+  }
+};
+
+export const addGroupToCategory = async (categoryId, groupData) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories/${categoryId}/groups`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+      body: JSON.stringify(groupData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao adicionar grupo" };
+  }
+};
+
+export const addItemToGroup = async (categoryId, groupIndex, itemData) => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories/${categoryId}/groups/${groupIndex}/items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+      body: JSON.stringify(itemData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao adicionar item" };
+  }
+};
+
+export const seedCategories = async () => {
+  try {
+    const token = localStorage.getItem("Cookie");
+    if (!token) {
+      return { success: false, error: "Sessão expirada" };
+    }
+
+    const response = await fetch(`${host}/categories/seed`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Token: token,
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Falha ao criar categorias padrão" };
+  }
+};
