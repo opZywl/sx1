@@ -26,6 +26,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { X } from "lucide-react";
+import { categories } from "@/lib/constants";
 
 const formSchema = z.object({
     name: z
@@ -56,6 +57,7 @@ const AddProducts = () => {
     const [isUploading, setIsUploading] = useState(false); // Loading state for image upload
     const [options, setOptions] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const categoryOptions = categories.filter((category) => category.value);
 
     // Cleanup blob URL when component unmounts or preview changes
     useEffect(() => {
@@ -308,11 +310,21 @@ const AddProducts = () => {
                         <FormItem>
                             <FormLabel>Categoria</FormLabel>
                             <FormControl>
-                                <Input
-                                    placeholder="Digite a categoria do produto"
-                                    {...field}
-                                    className="bg-dark-3 border border-white/20 h-12"
-                                />
+                                <Select
+                                    onValueChange={field.onChange}
+                                    value={field.value}
+                                >
+                                    <SelectTrigger className="bg-dark-3 border border-white/20 h-12">
+                                        <SelectValue placeholder="Selecione a categoria" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-dark-4 text-white border-none">
+                                        {categoryOptions.map((category) => (
+                                            <SelectItem key={category.value} value={category.value}>
+                                                {category.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
                             </FormControl>
                             <FormMessage />
                         </FormItem>

@@ -144,12 +144,10 @@ export const usersMenu = [
 
 export const categories = [
   { name: "Todos", value: "" },
-  { name: "Infantil", value: "kids" },
-  { name: "Masculino", value: "mens" },
-  { name: "Feminino", value: "womens" },
-  { name: "Calçados", value: "footwear" },
-  { name: "Eletrônicos", value: "electronics" },
-  { name: "Acessórios", value: "accessories" },
+  { name: "Camisetas Retro", value: "Camisetas Retro" },
+  { name: "Times", value: "Times" },
+  { name: "Copa", value: "Copa" },
+  { name: "Sneakers", value: "Sneakers" },
 ];
 
 export const sortOptions = [
