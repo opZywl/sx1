@@ -59,6 +59,7 @@ const Nike = () => {
           <span>W</span>
           <span>O</span>
           <span>R</span>
+          <span>L</span>
           <span>D</span>
           <span>&nbsp;</span>
           <span>C</span>

@@ -36,8 +36,8 @@ const RootNavbar = () => {
   const [promoIndex, setPromoIndex] = useState(0);
 
   const promoMessages = [
-    "Frete grátis para membros nas compras acima de R$ 299",
-    "Parcelamento em até 10x sem juros",
+    "Frete grátis para todo Brasil",
+    "Parcelamento em até 12x",
     "Troca fácil em até 30 dias",
   ];
 
